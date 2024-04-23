@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitter's Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .mt-4 {
+            margin-top: 20px;
+        }
+
+        .p-5 {
+            padding: 20px;
+        }
+
+        .bg-secondary {
+            background-color: #6c757d;
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        td button:hover {
+            background-color: #0056b3;
+        }
+
+        td button a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sitter's Information</h1>
+    
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hey {{ user }}!</strong> You're welcome.
+     
+    </form>
+    </div>
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Date Of Birth</th>
+                    <th>Gender</th>
+                    <th>Location</th>
+                    <th>Next Of Kin</th>
+                    <th>Next Of Kin Contact</th>
+                    <th>NIN number</th>
+                    <th>Recommender's Name</th>
+                    <th>Recommender's Contact</th>
+                    <th>Religion</th>
+                    <th>Education Background</th>
+                    <th>Sitter Number</th>
+                    <th>Sitter's Contact</th>
+                    <th>Action</th>
+ 
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.first_name }}</td>
+                        <td>{{ record.last_name }}</td>
+                        <td>{{ record.date_of_birth }}</td>
+                        <td>{{ record.gender }}</td>
+                        <td>{{ record.location }}</td>
+                        <td>{{ record.next_of_kin }}</td>
+                        <td>{{ record.next_of_kin_phone }}</td>
+                        <td>{{ record.NIN_number }}</td>
+                        <td>{{ record.recommenders_name }}</td>
+                        <td>{{ record.recommenders_phone }}</td>
+                        <td>{{ record.religion }}</td>
+                        <td>{{ record.level_of_education }}</td>
+                        <td>{{ record.sitter_number }}</td>
+                        <td>{{ record.phone_number }}</td>
+                        <td>
+                            <button type="submit"><a href="{% url 'edit_record' record.id %}">Edit</a></button>
+                            <form action="{% url 'delete_record' record.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Include Bootstrap for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* Add transition effect to the images */
+        .card img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Add hover effect to the images */
+        .card img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body style="background-color: #000000;">
+    <br><br>
+<center>
+    <div class="app-icon"><img src="{% static 'images/looggoo.png'  %}" > </div>
+</center>
+    <div style="margin-top: 50px;" class="container">
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href = "{% url 'todo_list' %}">
+                                <img src= "{% static 'images/event_icon.png'  %}"  alt="Events" class="img-fluid">
+                            </a>
+                                <h5 class="mt-3">Events</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{% url 'regester' %}">
+                                    <img src= "{% static 'images/registr_icon.png'  %}"  alt="Registration" class="img-fluid">
+                                </a>
+                                <h5 class="mt-3">Registration</h5>
+                            </div>
+                            <hr>
+                            <div class="col-md-6">
+                                <img style="width:120px; height:120px" src="{% static 'images/products_icon.jpg'  %}" alt="Products" class="img-fluid">
+                                <h5 class="mt-3">Products</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <img style="width:120px; height:120px" src="{% static 'images/payments_icon.png'  %}" alt="Payments" class="img-fluid">
+                                <h5 class="mt-3">Payments</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+<center>
+    <footer style="color:white">
+        &copy; 2024 DayStar Daycare. All rights reserved.
+    </footer>
+</center>
+
+<br>
+</body>
+</html>
