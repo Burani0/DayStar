@@ -44,7 +44,7 @@ class Baby(models.Model):
     )
     created_at =models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=50, blank=True,null=True)
-    Surname = models.CharField(max_length=30, blank=True,null=True)
+    last_name = models.CharField(max_length=30, blank=True,null=True)
     gender = models.CharField(max_length=10, blank=True,null=True, choices=GENDER)
     age = models.IntegerField(null=True, blank=True)
     location = models.CharField(max_length=30, null=True, blank=True)
