@@ -44,7 +44,7 @@ class AddRecordForm(forms.ModelForm):
     NIN_number = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"NIN number", "class":"form-control"}), label="")
     recommenders_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Name", "class":"form-control"}), label="")
     recommenders_phone =  forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Contact", "class":"form-control"}), label="")
-    religion = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":" Religion", "class":"form-control"}), label="")
+    religion = forms.CharField( required=False, widget=forms.widgets.TextInput(attrs={"placeholder":" Religion", "class":"form-control"}), label="")
     level_of_education = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Education Background", "class":"form-control"}), label="")
     sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
     phone_number =  forms.IntegerField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter's Contact", "class":"form-control"}), label="")
@@ -64,7 +64,6 @@ class AddBabyForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}))
- 
     age = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Age", "class":"form-control"}), label="")
     location = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Location", "class":"form-control"}), label="")
     mother_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Mother's Name", "class":"form-control"}), label="")
@@ -144,6 +143,7 @@ class MonthlypayForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     payment_status = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Status", "class":"form-control"}), label="")
+    amount_paid = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Paid", "class":"form-control"}), label="")
     balance = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Balance", "class":"form-control"}), label="")
     days_attended = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Days Attended", "class":"form-control"}), label="")
 
@@ -157,7 +157,9 @@ class DailypayForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     shift_attended = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Shift Attended", "class":"form-control"}), label="")
+
     payment_status = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Status", "class":"form-control"}), label="")
+    amount_paid = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Paid", "class":"form-control"}), label="")
     balance = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Balance", "class":"form-control"}), label="")
 
     class Meta:

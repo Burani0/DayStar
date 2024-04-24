@@ -334,15 +334,102 @@ def delete_assign(request, pk):
 
 
 def edit_assign(request, pk):
-    duty = get_object_or_404(Assign, id=pk)
+    assign = get_object_or_404(Assign, id=pk)
     if request.method == 'POST':
         form = AssignForm(request.POST, instance=assign)
         if form.is_valid():
             form.save()
             return redirect('assign_list')  # Redirect to the record list page after editing
     else:
-        form =  AssignForm(instance=duty)
+        form =  AssignForm(instance=assign)
     return render(request, 'edit_assign.html', {'form': form})
+
+
+def payments(request):
+    return render(request, 'payments.html')
+
+
+    
+
+def add_monthly(request):
+    if request.method == 'POST':
+        form = MonthlypayForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('monthly_list')  # Assuming you have a URL named 'record_list' for listing records
+    else:
+        form =  MonthlypayForm()
+    return render(request, 'add_monthly.html', {'form': form})
+
+def monthly_list(request):
+    records = Monthlypay.objects.all()
+    return render(request, 'monthly_list.html', {'records': records})
+
+
+
+def delete_monthly(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Monthlypay.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('monthly_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('monthly_list')
+
+
+
+def edit_monthly(request, pk):
+    monthlypay = get_object_or_404(Monthlypay, id=pk)
+    if request.method == 'POST':
+        form = MonthlypayForm(request.POST, instance=monthlypay)
+        if form.is_valid():
+            form.save()
+            return redirect('monthly_list')  # Redirect to the record list page after editing
+    else:
+        form =  MonthlypayForm(instance=monthlypay)
+    return render(request, 'edit_monthly.html', {'form': form})
+
+
+def add_daily(request):
+    if request.method == 'POST':
+        form = DailypayForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('daily_list')  # Assuming you have a URL named 'record_list' for listing records
+    else:
+        form =  DailypayForm()
+    return render(request, 'add_daily.html', {'form': form})
+
+def daily_list(request):
+    records = Dailypay.objects.all()
+    return render(request, 'daily_list.html', {'records': records})
+
+
+
+def delete_daily(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Dailypay.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('daily_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('daily_list')
+
+
+
+def edit_daily(request, pk):
+    dailypay = get_object_or_404(Dailypay, id=pk)
+    if request.method == 'POST':
+        form = DailypayForm(request.POST, instance=dailypay)
+        if form.is_valid():
+            form.save()
+            return redirect('daily_list')  # Redirect to the record list page after editing
+    else:
+        form =  DailypayForm(instance=dailypay)
+    return render(request, 'edit_daily.html', {'form': form})
+
 
 
  

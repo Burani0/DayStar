@@ -38,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('reset-password/', views.reset_password, name='reset_password'),
     path('regester/', views.regester, name='regester'),
+    path('payments/', views.payments, name='payments'),
     path('add_record/', views.add_record, name='add_record'),
     path('list/', views.record_list, name='record_list'),
     path('delete_record/<str:pk>/', views.delete_record, name='delete_record'),
@@ -66,7 +67,14 @@ urlpatterns = [
     path('edit_assign/<int:pk>/', views.edit_assign, name='edit_assign'),
     path('assign_list/', views.assign_list, name='assign_list'),
     path('delete_assign/<int:pk>/', views.delete_assign, name='delete_assign'),
- 
+    path('add_monthly/', views.add_monthly, name='add_monthly'),
+    path('delete_monthly/<int:pk>/', views.delete_monthly, name='delete_monthly'),
+    path('monthly/', views.monthly_list, name='monthly_list'),
+    path('edit_monthly/<int:pk>/', views.edit_monthly, name='edit_monthly'),
+    path('add_daily/', views.add_daily, name='add_daily'),
+    path('daily_list/' ,views.daily_list, name='daily_list'),
+    path('delete_daily/<int:pk>/', views.delete_daily, name='delete_daily'),
+    path('edit_daily/<int:pk>/', views.edit_daily, name='edit_daily'),
 
     
  

@@ -1,0 +1,31 @@
+{% extends  'base.html' %}
+
+{% block content%}
+   
+    <div class="card-container" id="first">
+        <h>Payments Dashbord</h>
+
+        <div style="border-radius: 50px; background-color: #ff8c00; width: 400px;" class="card" id="second">
+      
+
+        <div class="card-container" id="first">
+            <a href="{% url 'monthly_list' %}">
+            <div class="card" id="second">
+                <h2>Monthly Payment</h2>
+            </div>
+
+        </a>
+
+
+            <a href="{% url 'daily_list' %}">
+            <div class="card" id="second">
+                <h2>Daily Payment</h2>
+            </div>
+            </a>
+ 
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -128,6 +128,7 @@ class Monthlypay(models.Model):
     first_name = models.CharField(max_length=50, blank=True,null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
     payment_status = models.CharField(max_length=50, blank=True, null=True)
+    amount_paid = models.CharField(max_length=50, blank=True, null=True)
     balance = models.IntegerField(null=True, blank=True)
     days_attended = models.IntegerField(null=True, blank=True)
 
@@ -140,6 +141,7 @@ class Dailypay(models.Model):
     last_name = models.CharField(max_length=50, blank=True, null=True)
     shift_attended = models.CharField(max_length=50, blank=True, null=True)
     payment_status = models.CharField(max_length=50, blank=True, null=True)
+    amount_paid = models.CharField(max_length=50, blank=True, null=True)
     balance = models.IntegerField(null=True, blank=True)
 
 

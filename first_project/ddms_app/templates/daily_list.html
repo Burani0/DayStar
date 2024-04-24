@@ -1,0 +1,54 @@
+{% extends  'base.html' %}
+
+{% block content%}
+    <h1>Daily Payments</h1>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hey {{ user }}!</strong> You're welcome.
+      
+    </div>
+    
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table>
+            <button><a href="{% url 'add_daily' %}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add
+            </a>
+        </button>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Shift attended</th>
+                    <th>Payment Status</th>
+                    <th>Amount Paid</th>
+                    <th>Balance</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for dailypay in records %}
+                <tr>
+                    <td>{{ dailypay.first_name }}</td>
+                    <td>{{ dailypay.last_name }}</td>
+                    <td>{{ dailypay.shift_attended }}</td>
+                    <td>{{ dailypay.payment_status }}</td>
+                    <td>{{ dailypay.amount_paid }}</td>
+                    <td>{{ dailypay.balance }}</td>
+                    
+                
+                <td>
+                    <button type="submit"><a href="{% url 'edit_daily' dailypay.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button>
+                            
+                            <form  style="background-color: white; box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_daily' dailypay.id %}" method="post">
+                                {% csrf_token %}
+                            
+                                <button    ><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDMS</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color:#000000;
+        margin: 0;
+        padding: 0;
+        color:white;
+
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color:  #ff8c00 ;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    form input[type="text"],
+    form input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      
+    }
+
+    form button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    form button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    .app-icon {
+        width: 100px;
+        height: 100px;
+        
+        border-radius: 50%;
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 36px;
+    }
+    .alert {
+        margin-bottom: 20px;
+    }
+
+    .mt-4 {
+        margin-top: 20px;
+    }
+
+    .p-5 {
+        padding: 20px;
+    }
+
+    .bg-secondary {
+        background-color:    #ff8c00;
+    }
+
+    .text-white {
+        color: #fff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    th, td {
+        border: 1px solid #000000;
+        padding: 8px;
+        text-align: left;
+
+    }
+
+    th {
+        background-color: #000000;
+        color: white;
+        border: 1px solid white;
+    }
+    td {
+        background-color: whitesmoke;
+        color:#000000
+    
+    }
+
+    td button {
+        background-color: white ;
+        color: #000000;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        
+    }
+
+    td button:hover {
+        background-color: #0056b3;
+    }
+
+    td button a {
+        color:#000000;
+        text-decoration: none;
+        background-color: white;
+         
+    }
+    #first {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+           
+        }
+
+    #second {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 40%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+    #second:hover {
+            transform: scale(1.05);
+        }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="app-icon"><img src="{% static 'images/looggoo.png'  %}" > </div>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    
+</body>
+</html>

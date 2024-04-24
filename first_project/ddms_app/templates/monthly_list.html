@@ -1,0 +1,49 @@
+{% extends  'base.html' %}
+
+{% block content%}
+    <h1>Monthly Payments</h1>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Hey {{ user }}!</strong> You're welcome.
+      
+    </div>
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table>
+            <button type="submit"><a href="{% url 'add_monthly' %}"> <i class="fas fa-plus"></i>Add</a></button>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Payment Status</th>
+                    <th>Amount Paid</th>
+                    <th>Balance</th>
+                    <th>Days Attended</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for monthlypay in records %}
+                <tr>
+                    <td>{{ monthlypay.first_name }}</td>
+                    <td>{{ monthlypay.last_name }}</td>
+                    <td>{{ monthlypay.payment_status }}</td>
+                    <td>{{ monthlypay.amount_paid }}</td>
+                    <td>{{ monthlypay.balance }}</td>
+                    <td>{{ monthlypay.days_attended }}</td>
+                    
+                
+                <td>
+                    <button type="submit"><a href="{% url 'edit_monthly' monthlypay.id %}"><i class="fas fa-edit"></i></a></button>    
+                            <form  style="background-color: white; box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_monthly' monthlypay.id %}" method="post">
+                                {% csrf_token %}
+
+                                <button ><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
