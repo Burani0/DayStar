@@ -432,4 +432,25 @@ def edit_daily(request, pk):
 
 
 
- 
+def baby_listpage(request)
+    if request.method == 'POST':
+        submitted_name = request.POST('name')
+        submitted_first_name = request.POST('first_name')
+        submitted_last_name = request.POST('last_name')
+        submitted_age = request.POST('age')
+        submitted_gender = request.POST('gender')
+        submitted_location = request.POST('location')
+
+        Query1 = Q(first_name_contains=submitted_name)
+        Query2 = Q(last_name_contains=submitted_name)
+        Query3 = Q(gender_contains=submitted_name)
+        Query4 = Q(age_contains=submitted_name)
+        Query5 = Q(location_contains=submitted_name)
+    else:
+        results = Baby.obobjects.all()
+    context = {
+        'records' : records
+    }
+    return render(request, 'baby_list.html', context)
+
+        
