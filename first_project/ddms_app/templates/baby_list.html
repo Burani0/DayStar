@@ -1,74 +1,76 @@
- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Babies' List</h1>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Hey {{ user }}!</strong> You're welcome.
-    </div>
-    <div class="mt-4 p-5 bg-secondary text-white rounded">
-        <!-- Button to add a new baby with an icon -->
+<h1>Babies' List</h1>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Hey {{ user }}!</strong> You're welcome.
+</div>
+ 
+ 
+
+<div class="mt-4 p-5 bg-secondary text-white rounded">
+   
+   
+  
+
+    <table class="table table-striped table-bordered">
         <div class="mb-3">
             <button><a href="{% url 'add_baby' %}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Add
-            </a>
-        </button>
+            </a></button>
+        
+            <form class="button" style="  box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px; max-width: 200px;" method="GET" action="{% url 'babies_list' %}">
+                <input type="text" name="search" class="form-control" placeholder="Search ...">
+               
+         
+            </form>
         </div>
-
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Gender</th>
-                    <th>Age</th>
-                    <th>Location</th>
-                    <th>Mother's name</th>
-                    <th>Mother's Contact</th>
-                    <th>Father's name</th>
-                    <th>Father's Contact</th>
-                    <th>Allergies/Special Diet</th>
-                    <th>Ongoing Medical Condition</th>
-                    <th>Language Understood</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for baby in records %}
-                <tr>
-                    <td>{{ baby.first_name }}</td>
-                    <td>{{ baby.last_name }}</td>
-                    <td>{{ baby.gender }}</td>
-                    <td>{{ baby.age }}</td>
-                    <td>{{ baby.location }}</td>
-                    <td>{{ baby.mother_name }}</td>
-                    <td>{{ baby.mother_phone }}</td>
-                    <td>{{ baby.father_name }}</td>
-                    <td>{{ baby.father_phone }}</td>
-                    <td>{{ baby.any_allegies }}</td>
-                    <td>{{ baby.any_ongoing_medication }}</td>
-                    <td>{{ baby.language_understood }}</td>
-                    <td>
-                        <button><a href="{% url 'edit_baby' baby.id %}" class="btn btn-danger">
-                            <i class="fas fa-edit"></i>
-                        </a>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Location</th>
+                <th>Mother's name</th>
+                <th>Mother's Contact</th>
+                <th>Father's name</th>
+                <th>Father's Contact</th>
+                <th>Allergies/Special Diet</th>
+                <th>Ongoing Medical Condition</th>
+                <th>Language Understood</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for baby in records %}
+            <tr>
+                <td>{{ baby.first_name }}</td>
+                <td>{{ baby.last_name }}</td>
+                <td>{{ baby.gender }}</td>
+                <td>{{ baby.age }}</td>
+                <td>{{ baby.location }}</td>
+                <td>{{ baby.mother_name }}</td>
+                <td>{{ baby.mother_phone }}</td>
+                <td>{{ baby.father_name }}</td>
+                <td>{{ baby.father_phone }}</td>
+                <td>{{ baby.any_allegies }}</td>
+                <td>{{ baby.any_ongoing_medication }}</td>
+                <td>{{ baby.language_understood }}</td>
+                <td>
+                    <button><a href="{% url 'edit_baby' baby.id %}" class="btn btn-danger">
+                        <i class="fas fa-edit"></i>
+                    </a></button>
+                    <form style="background-color: white; box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_baby' baby.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
                         </button>
-                        <form style="background-color: white; box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_baby' baby.id %}" method="post">
-                            {% csrf_token %}
-                          
-
-                        
-                            <button class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            
-
-                        </form>
-
-
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

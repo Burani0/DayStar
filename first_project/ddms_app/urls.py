@@ -75,6 +75,15 @@ urlpatterns = [
     path('daily_list/' ,views.daily_list, name='daily_list'),
     path('delete_daily/<int:pk>/', views.delete_daily, name='delete_daily'),
     path('edit_daily/<int:pk>/', views.edit_daily, name='edit_daily'),
+    path('babies/', views.babies_list, name='babies_list'),
+    path('monthlys/', views.monthlys_list, name='monthlys_list'),
+    path('dailys/', views.dailys_list, name='dailys_list'),
+    path('arrivals/', views.arrivals_list, name='arrivals_list'),
+    path('departures/', views.departures_list, name='departures_list'),
+    path('dutys/',views.dutys_list, name='dutys_list'),
+    
+    path('rege/', views.rege_list, name='rege_list'),
+     
 
     
  

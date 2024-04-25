@@ -432,25 +432,148 @@ def edit_daily(request, pk):
 
 
 
-def baby_listpage(request)
-    if request.method == 'POST':
-        submitted_name = request.POST('name')
-        submitted_first_name = request.POST('first_name')
-        submitted_last_name = request.POST('last_name')
-        submitted_age = request.POST('age')
-        submitted_gender = request.POST('gender')
-        submitted_location = request.POST('location')
-
-        Query1 = Q(first_name_contains=submitted_name)
-        Query2 = Q(last_name_contains=submitted_name)
-        Query3 = Q(gender_contains=submitted_name)
-        Query4 = Q(age_contains=submitted_name)
-        Query5 = Q(location_contains=submitted_name)
+def babies_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Baby.objects.filter(
+            first_name__icontains=search_query
+        ) | Baby.objects.filter(
+            last_name__icontains=search_query
+        ) | Baby.objects.filter(
+            age__icontains=search_query
+        ) | Baby.objects.filter(
+            gender__icontains=search_query
+        )
     else:
-        results = Baby.obobjects.all()
-    context = {
-        'records' : records
-    }
-    return render(request, 'baby_list.html', context)
+        records = Baby.objects.all()
 
-        
+    return render(request, 'baby_list.html', {'records': records, 'user': request.user})
+
+
+
+
+
+
+def monthlys_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Monthlypay.objects.filter(
+            first_name__icontains=search_query
+        ) | Monthlypay.objects.filter(
+            last_name__icontains=search_query
+        ) | Monthlypay.objects.filter(
+            payment_status__icontains=search_query
+        )
+    else:
+        records = Monthlypay.objects.all()
+
+    return render(request, 'monthly_list.html', {'records': records, 'user': request.user})
+
+
+def dailys_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Dailypay.objects.filter(
+            first_name__icontains=search_query
+        ) | Dailypay.objects.filter(
+            last_name__icontains=search_query
+        ) | Dailypay.objects.filter(
+            shift_attended__icontains=search_query
+        ) | Dailypay.objects.filter(
+            payment_status__icontains=search_query
+        )
+    else:
+        records = Dailypay.objects.all()
+
+    return render(request, 'daily_list.html', {'records': records, 'user': request.user})
+
+
+def dutys_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Duty.objects.filter(
+            first_name__icontains=search_query
+        ) | Duty.objects.filter(
+            last_name__icontains=search_query
+        ) | Duty.objects.filter(
+            sitter_number__icontains=search_query
+        )
+    else:
+        records =  Duty.objects.all()
+
+    return render(request, 'duty_list.html', {'records': records, 'user': request.user})
+
+
+def arrivals_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Arrival.objects.filter(
+            first_name__icontains=search_query
+        ) | Arrival.objects.filter(
+            last_name__icontains=search_query
+        ) | Arrival.objects.filter(
+            period_of_stay__icontains=search_query
+        ) | Arrival.objects.filter(
+            payment_status__icontains=search_query
+        )
+    else:
+        records = Arrival.objects.all()
+
+    return render(request, 'arrival_list.html', {'records': records, 'user': request.user})
+
+
+def departures_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Departure.objects.filter(
+            first_name__icontains=search_query
+        ) | Departure.objects.filter(
+            last_name__icontains=search_query
+        ) | Departure.objects.filter(
+            period_stayed__icontains=search_query
+        ) | Departure.objects.filter(
+            payment_status__icontains=search_query
+        )
+    else:
+        records = Departure.objects.all()
+
+    return render(request, 'departure_list.html', {'records': records, 'user': request.user})
+
+
+def rege_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Record.objects.filter(
+            first_name__icontains=search_query
+        ) | Record.objects.filter(
+            last_name__icontains=search_query
+        ) | Record.objects.filter(
+            sitter_number__icontains=search_query
+        ) | Record.objects.filter(
+            gender__icontains=search_query
+        )
+    else:
+        records = Record.objects.all()
+
+    return render(request, 'record_list.html', {'records': records, 'user': request.user})
+
+
+
+def give_list(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Assign.objects.filter(
+            first_name__icontains=search_query
+        ) | Assign.objects.filter(
+            last_name__icontains=search_query
+        ) | Assign.objects.filter(
+            baby_assigned__icontains=search_query
+        )
+    else:
+        records =  Assign.objects.all()
+
+    return render(request, 'assign_list.html', {'records': records, 'user': request.user})
+
+
+
+

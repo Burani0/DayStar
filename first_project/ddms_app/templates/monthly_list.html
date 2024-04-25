@@ -7,8 +7,19 @@
       
     </div>
     <div class="mt-4 p-5 bg-secondary text-white rounded">
-        <table>
-            <button type="submit"><a href="{% url 'add_monthly' %}"> <i class="fas fa-plus"></i>Add</a></button>
+        <table class="table table-striped table-bordered">
+            <div class="mb-3">
+                <button><a href="{% url 'add_monthly' %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add
+                </a></button>
+            
+                <form class="button" style="  box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px; max-width: 200px;" method="GET" action="{% url 'monthlys_list' %}">
+                    <input type="text" name="search" class="form-control" placeholder="Search ...">
+                   
+             
+                </form>
+            </div>
+         
             <thead>
                 <tr>
                     <th>First Name</th>
