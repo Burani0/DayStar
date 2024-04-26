@@ -86,14 +86,17 @@ def record_list(request):
 
 def delete_record(request, pk):
     if request.user.is_authenticated:
-        delete_it = Record.objects.get(id = pk)
-        delete_it.delete()
-        messages.success(request, 'Record deleted successfuly')
-        return redirect('record_list')
+        delete_it = Record.objects.get(id=pk)
+        if request.method == 'POST':
+            delete_it.delete()
+            messages.success(request, 'Record deleted successfully')
+            return redirect('record_list')
+        else:
+            messages.warning(request, 'Are you sure you want to delete this record?')
+            return redirect('record_list')
     else:
         messages.success(request, "You must be logged in to delete!")
         return redirect('record_list')
-
 
 def edit_record(request, record_id):
     record = get_object_or_404(Record, id=record_id)
@@ -128,6 +131,7 @@ def delete_baby(request, pk):
     if request.user.is_authenticated:
         delete_it = Baby.objects.get(id = pk)
         delete_it.delete()
+        messages.success(request, 'Record deleted successfully')
         messages.success(request, 'Record deleted successfuly')
         return redirect('baby_list')
     else:
@@ -573,7 +577,6 @@ def give_list(request):
         records =  Assign.objects.all()
 
     return render(request, 'assign_list.html', {'records': records, 'user': request.user})
-
 
 
 
