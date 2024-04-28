@@ -1,43 +1,109 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Custom Navbar with Dropdowns</title>
+    <style>
+        /* Base Navbar Styles */
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+        }
 
-<style>
-    h1{background-image: url("../static/images/delete.png " ); background-repeat: no-repeat; }
-    <link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</style>
+        /* Navbar Layout */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between; /* Space out menu items */
+        }
+
+        nav li {
+            position: relative; /* Required for absolute positioning of dropdown */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ccc; /* Change color on hover */
+        }
+
+        /* Dropdown Base Styles */
+        nav ul ul {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%; /* Position below the main item */
+            left: 0;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 100; /* Ensure dropdowns are on top */
+        }
+
+        /* Show the Dropdown on Hover */
+        nav li:hover ul {
+            display: block; /* Display the dropdown when hovering */
+        }
+
+        /* Dropdown Link Styles */
+        nav ul ul li {
+            width: 150px; /* Width of the dropdown menu */
+        }
+
+        nav ul ul li a {
+            display: block; /* Make dropdown links full-width */
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul ul li a:hover {
+            background-color: #444; /* Change background color on hover */
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <i class="fa-solid fa-trash-can">delete</i>
-    <h1>fa fa-address-book-o</h1>
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li> <!-- Main nav item -->
 
-<i class="fa fa-address-book-o"></i>
-<i class="fa fa-address-book-o" style="font-size:24px"></i>
-<i class="fa fa-address-book-o" style="font-size:36px"></i>
-<i class="fa fa-address-book-o" style="font-size:
+    <!-- First Dropdown -->
+    <li>
+      <a href="#">Dropdown 1</a>
+      <ul> <!-- Dropdown menu -->
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+      </ul>
+    </li>
 
-</body>
-</html> -->
+    <!-- Second Dropdown -->
+    <li>
+      <a href="#">Dropdown 2</a>
+      <ul>
+        <li><a href="#">Link 4</a></li>
+        <li><a href="#">Link 5</a></li>
+        <li><a href="#">Link 6</a></li>
+      </ul>
+    </li>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Font Awesome Icons</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-
-<h1>fa fa-address-book-o</h1>
-
-<i class="fa fa-address-book-o"></i>
-<i class="fa fa-address-book-o" style="font-size:24px"></i>
-<i class="fa fa-address-book-o" style="font-size:36px"></i>
-<!-- <i class="fa fa-address-book-o" style="font-size:></i> -->
-
+    <!-- Third Dropdown -->
+    <li>
+      <a href="#">Dropdown 3</a>
+      <ul>
+        <li><a href="/first_project/ddms_app/templates/baby_list.html">Link 7</a></li>
+        <li><a href="#">Link 8</a></li>
+        <li><a href="#">Link 9</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 </body>
 </html>

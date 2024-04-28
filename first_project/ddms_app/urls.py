@@ -83,6 +83,7 @@ urlpatterns = [
     path('dutys/',views.dutys_list, name='dutys_list'),
     
     path('rege/', views.rege_list, name='rege_list'),
+    path('give/', views.give_list, name='give_list'),
      
 
     
