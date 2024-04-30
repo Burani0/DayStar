@@ -21,13 +21,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for attendance in attendances %}
+                    {% for sitter_pay in records %}
                     <tr>
-                        <td>{{ attendance.first_name }}</td>
-                        <td>{{ attendance.last_name }}</td>
-                        <td>{{ attendance.number_of_babies_attended_to }}</td>
-                        <td>{{ attendance.amount_per_baby }}</td>
-                        <td>{{ attendance.total }}</td>
+                        <td>{{ sitter_pay.first_name }}</td>
+                        <td>{{ sitter_pay.last_name }}</td>
+                        <td>{{ sitter_pay.number_of_babies_attended_to }}</td>
+                        <td>{{ sitter_pay.amount_per_baby }}</td>
+                        <td>{{ sitter_pay.total }}</td>
                         <td></td>
                     </tr>
                     {% endfor %}

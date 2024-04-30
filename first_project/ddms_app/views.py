@@ -581,19 +581,19 @@ def give_list(request):
 
 def add_sitter_pay(request):
     if request.method == 'POST':
-        form = BabyAttendanceForm(request.POST)
+        form = Sitter_paymentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('list_baby_attendance')
+            return redirect('sitter_pay_list')
     else:
-        form = BabyAttendanceForm()
+        form =  Sitter_paymentForm()
 
     return render(request, 'add_sitter_pay.html', {'form': form})
 
 # View to list all BabyAttendance objects
-def list_baby_attendance(request):
-    attendances = BabyAttendance.objects.all()
-    return render(request, 'list_baby_attendance.html', {'attendances': attendances})
+def sitter_pay_list(request):
+    records = Sitter_payment.objects.all()
+    return render(request, 'sitter_pay_list.html', {'records': records})
 
 
 

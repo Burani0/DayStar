@@ -168,14 +168,14 @@ class DailypayForm(forms.ModelForm):
 
 
 
-class BabyAttendanceForm(forms.ModelForm):
+class Sitter_paymentForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     number_of_babies_attended_to = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Number of Babies Attended To", "class":"form-control"}), label="")
     # amount_per_baby = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Per Baby", "class":"form-control"}), label="")
 
     class Meta:
-        model = BabyAttendance
+        model =  Sitter_payment
         fields = "__all__"
      
         # model = BabyAttendance

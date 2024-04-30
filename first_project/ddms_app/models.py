@@ -150,7 +150,7 @@ class Dailypay(models.Model):
 
 
 
-class BabyAttendance(models.Model):
+class Sitter_payment(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     number_of_babies_attended_to = models.IntegerField()
