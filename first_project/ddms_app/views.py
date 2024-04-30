@@ -579,4 +579,21 @@ def give_list(request):
     return render(request, 'assign_list.html', {'records': records, 'user': request.user})
 
 
+def add_sitter_pay(request):
+    if request.method == 'POST':
+        form = BabyAttendanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_baby_attendance')
+    else:
+        form = BabyAttendanceForm()
+
+    return render(request, 'add_sitter_pay.html', {'form': form})
+
+# View to list all BabyAttendance objects
+def list_baby_attendance(request):
+    attendances = BabyAttendance.objects.all()
+    return render(request, 'list_baby_attendance.html', {'attendances': attendances})
+
+
 

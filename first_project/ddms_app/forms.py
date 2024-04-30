@@ -47,7 +47,7 @@ class AddRecordForm(forms.ModelForm):
     religion = forms.CharField( required=False, widget=forms.widgets.TextInput(attrs={"placeholder":" Religion", "class":"form-control"}), label="")
     level_of_education = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Education Background", "class":"form-control"}), label="")
     sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
-    phone_number =  forms.IntegerField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter's Contact", "class":"form-control"}), label="")
+    phone_number =  forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter's Contact", "class":"form-control"}), label="")
 
  
     class Meta:
@@ -165,6 +165,21 @@ class DailypayForm(forms.ModelForm):
     class Meta:
         model = Dailypay
         fields = "__all__"
+
+
+
+class BabyAttendanceForm(forms.ModelForm):
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
+    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
+    number_of_babies_attended_to = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Number of Babies Attended To", "class":"form-control"}), label="")
+    # amount_per_baby = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Per Baby", "class":"form-control"}), label="")
+
+    class Meta:
+        model = BabyAttendance
+        fields = "__all__"
+     
+        # model = BabyAttendance
+        # fields = ['first_name', 'surname', 'number_of_babies_attended_to', 'amount_per_baby']
 
 
 

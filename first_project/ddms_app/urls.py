@@ -84,6 +84,8 @@ urlpatterns = [
     
     path('rege/', views.rege_list, name='rege_list'),
     path('give/', views.give_list, name='give_list'),
+    path('create/', views.add_sitter_pay, name='create_baby_attendance'),
+    path('list_attendance/', views.list_baby_attendance, name='list_baby_attendance'),
      
 
     

@@ -26,7 +26,7 @@ class Record(models.Model):
     religion = models.CharField(max_length=20)
     level_of_education = models.CharField(max_length=20 )
     sitter_number = models.IntegerField(default=0)
-    phone_number = models.IntegerField(default=0)
+    phone_number = models.CharField(max_length=20)
     
     def __str__(self):
         return (f"{self.first_name} {self.last_name}")
@@ -147,6 +147,23 @@ class Dailypay(models.Model):
 
     def __str__(self):
         return (f'Dailypay:{self.first_name}')
+
+
+
+class BabyAttendance(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    number_of_babies_attended_to = models.IntegerField()
+    amount_per_baby = models.DecimalField(default=3000, max_digits=10, decimal_places=2)
+
+    def total(self):
+        return self.number_of_babies_attended_to * self.amount_per_baby
+
+    def __str__(self):
+        return f"{self.first_name} {self.surname}"
+
+
+
 
 
 
