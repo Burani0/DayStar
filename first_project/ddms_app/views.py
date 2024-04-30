@@ -132,7 +132,7 @@ def delete_baby(request, pk):
         delete_it = Baby.objects.get(id = pk)
         delete_it.delete()
         messages.success(request, 'Record deleted successfully')
-        messages.success(request, 'Record deleted successfuly')
+         
         return redirect('baby_list')
     else:
         messages.success(request, "You must be logged in to delete!")
@@ -594,6 +594,30 @@ def add_sitter_pay(request):
 def sitter_pay_list(request):
     records = Sitter_payment.objects.all()
     return render(request, 'sitter_pay_list.html', {'records': records})
+
+
+def delete_sitterpay(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Sitter_payment.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('sitter_pay_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('sitter_pay_list')
+
+
+
+def edit_sitterpay(request, pk):
+    sitter_pay = get_object_or_404(Sitter_payment, id=pk)
+    if request.method == 'POST':
+        form = Sitter_paymentForm(request.POST, instance=sitter_pay)
+        if form.is_valid():
+            form.save()
+            return redirect('sitter_pay_list')  # Redirect to the record list page after editing
+    else:
+        form =  Sitter_paymentForm(instance=sitter_pay)
+    return render(request, 'edit_sitter_pay.html', {'form': form})
 
 
 
