@@ -619,5 +619,21 @@ def edit_sitterpay(request, pk):
         form =  Sitter_paymentForm(instance=sitter_pay)
     return render(request, 'edit_sitter_pay.html', {'form': form})
 
+def search_pay_sitter(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Sitter_payment.objects.filter(
+            first_name__icontains=search_query
+        ) | Sitter_payment.objects.filter(
+            last_name__icontains=search_query
+        ) | Sitter_payment.objects.filter(
+            amount_per_baby__icontains=search_query
+        )
+    else:
+        records =  Sitter_payment.objects.all()
+
+    return render(request, 'sitter_pay_list.html', {'records': records, 'user': request.user})
+
+
 
 

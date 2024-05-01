@@ -8,7 +8,7 @@
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-color:#000000;
+        background-color:#070F2B;
         margin: 0;
         padding: 0;
         color:white;
@@ -18,13 +18,13 @@
     h1 {
         text-align: center;
         margin-top: 0px;
-        color:orangered
+        color:#DCF2F1;
     }
 
     form {
         max-width: 500px;
         margin: 0 auto;
-        background-color:  #ff8c00 ;
+        background-color: #7FC7D9 ;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -67,6 +67,7 @@
     }
     .alert {
         margin-bottom: 20px;
+        color:#DCF2F1
     }
 
     .mt-4 {
@@ -78,7 +79,7 @@
     }
 
     .bg-secondary {
-        background-color:    #f86c08;
+        background-color:    #7FC7D9;
     }
 
     .text-white {
@@ -99,32 +100,31 @@
     }
 
     th {
-        background-color: #000000;
+        background-color: #365486;
         color: white;
         border: 1px solid white;
     }
     td {
-        background-color: whitesmoke;
+        background-color: #DCF2F1;
         color:#000000
     
     }
 
     td button {
         background-color: white ;
-        color: #000000;
+        color: red;
         border: none;
-        padding: 5px 10px;
+        /* padding: 5px 10px; */
         cursor: pointer;
-        border-radius: 4px;
         
     }
 
     td button:hover {
-        background-color: #0056b3;
+        background-color: #7FC7D9;
     }
 
     td button a {
-        color:#000000;
+        color:green;
         text-decoration: none;
         background-color: white;
          
@@ -156,7 +156,7 @@
         background-color: #ff8c00;
     }
     footer {
-            background: #333;
+            background:#000000;
             color: #fff;
             padding: 20px 0;
         }
@@ -190,7 +190,7 @@
     
     
  nav {
-  background-color: #333;
+  background-color: #000000;
   color: #fff;
   padding: 1em;
 }
@@ -285,13 +285,15 @@ nav ul ul li a {
           </li>
         </ul>
       </nav>
-<div class="app-icon"><img src="{% static 'images/looggoo.png'  %}" > </div>
+<div class="app-icon"><img src="{% static 'images/Logogram.mp4 '  %}" > </div>
 
-
+ 
     <div>
         {% block content %}
         {% endblock %}
+        
     </div>
+    <hr>
 <!-- Footer starts here -->
 <footer>
     <div class="container text-center">
