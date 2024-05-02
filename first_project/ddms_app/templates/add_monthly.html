@@ -1,6 +1,8 @@
 {% extends  'base.html' %}
 
 {% block content%}
+<a class="back" href="{% url 'monthly_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
+
     <h1>Registering Monthly Payments</h1>
     <form method="post">
         {% csrf_token %}
