@@ -22,9 +22,8 @@
         
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Sitter number</th>
+                    <th>Sitter Name</th>
+                 
                     <th>Babies Assigned</th>
                     <th>Action</th>
 
@@ -34,9 +33,7 @@
             <tbody>
                 {% for assign in records %}
                 <tr>
-                    <td>{{ assign.first_name }}</td>
-                    <td>{{ assign.last_name }}</td>
-                    <td>{{ assign.sitter_number }}</td>
+                    <td>{{ assign.sitter_on_duty }}</td>
                     <td>{{  assign.baby_assigned   }}</td>
  
                 

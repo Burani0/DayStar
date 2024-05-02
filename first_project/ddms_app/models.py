@@ -72,12 +72,12 @@ class Arrival(models.Model):
 
  
     payment_status = models.CharField(max_length=20, blank=True, null=True, )
-    sitter_assigned = models.CharField(max_length=20, blank=True, null=True)
+     
     
 
 
     def __str__(self):
-        return (f'Arrival:{self.first_name}')
+        return f'{self.first_name} {self.last_name}'
 
 
 class Departure(models.Model):
@@ -110,18 +110,32 @@ class Sitter_on_duty(models.Model):
     sitter_number = models.IntegerField(blank=True, null=True)
     
     def __str__(self):
-        return (f'Sitter_on_duty:{self.first_name}')
+        return f'{self.first_name} {self.last_name}'
 
 
 class Assign(models.Model):
-    first_name = models.CharField(max_length=50, blank=True,null=True)  
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    sitter_number = models.IntegerField(null=True, blank=True)
-    baby_assigned = models.CharField(max_length=50, blank=True, null=True   )
-     
+    # Foreign key pointing to Sitter_on_duty
+    sitter_on_duty = models.ForeignKey(
+        Sitter_on_duty,
+        on_delete=models.CASCADE,
+        related_name='assignments',
+        null=True,
+        blank=True
+    )
+
+    # Foreign key pointing to Arrival for baby_assigned
+    baby_assigned = models.ForeignKey(
+        Arrival,
+        on_delete=models.SET_NULL,  # If the Arrival record is deleted, set to null
+        related_name='assignments',  # Allows reverse lookup
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
-        return (f'Assign:{self.first_name}')
+        sitter_name = f'{self.sitter_on_duty.first_name} {self.sitter_on_duty.last_name}' if self.sitter_on_duty else 'No Sitter Assigned'
+        baby_name = f'{self.baby_assigned.first_name} {self.baby_assigned.last_name}' if self.baby_assigned else 'No Baby Assigned'
+        return f'Assign: {sitter_name} - Baby: {baby_name}'
 
 
 class Monthlypay(models.Model):
@@ -130,7 +144,7 @@ class Monthlypay(models.Model):
     payment_status = models.CharField(max_length=50, blank=True, null=True)
     amount_paid = models.CharField(max_length=50, blank=True, null=True)
     balance = models.IntegerField(null=True, blank=True)
-    days_attended = models.IntegerField(null=True, blank=True)
+    
 
     def __str__(self):
         return (f'Monthlypay:{self.first_name}')

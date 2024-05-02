@@ -89,7 +89,6 @@ class ArrivalForm(forms.ModelForm):
     time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
     period_of_stay = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Period of Stay ',"class":"form-check-input"}), label="")
     payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
-    sitter_assigned = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Sitter Assigned ',"class":"form-check-input"}), label="")
     
     class Meta:
         model = Arrival
@@ -127,15 +126,19 @@ class Sitter_on_dutyForm(forms.ModelForm):
         fields = "__all__"
 
 
-class AssignForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
-    sitter_number =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
-    baby_assigned = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Babies Assigned", "class":"form-control"}), label="")
+# class AssignForm(forms.ModelForm):
+#     sitter_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
+     
+#     baby_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Babies Assigned", "class":"form-control"}), label="")
    
+#     class Meta:
+#         model = Assign
+#         fields = "__all__"
+
+class AssignForm(forms.ModelForm):
     class Meta:
         model = Assign
-        fields = "__all__"
+        fields = ['sitter_on_duty', 'baby_assigned']
 
 
 
@@ -145,9 +148,7 @@ class MonthlypayForm(forms.ModelForm):
     payment_status = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Status", "class":"form-control"}), label="")
     amount_paid = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Paid", "class":"form-control"}), label="")
     balance = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Balance", "class":"form-control"}), label="")
-    days_attended = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Days Attended", "class":"form-control"}), label="")
-
-
+     
     class Meta:
         model = Monthlypay
         fields = "__all__"
