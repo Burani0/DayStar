@@ -5,30 +5,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <!-- Include Bootstrap for styling -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
-        /* Add transition effect to the images */
+       
         .card img {
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Add hover effect to the images */
+        
         .card img:hover {
             transform: scale(1.1);
         }
+ 
+
+        footer p {
+            font-size: 14px;
+        }  
+body {
+  margin: 0;  
+  padding: 0;
+  
+ 
+        
+   
+}
+
+ 
+
+ 
+footer {
+            background-color: #8B4513;  
+            color: #F0F8FF;  
+            text-align: center;
+            padding: 20px; 
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+ 
+nav {
+  background-color: #8B4513;  
+  padding: 20px;  
+  display: flex;  
+  justify-content: space-between;  
+}
+
+ 
+nav ul {
+  list-style-type: none; 
+  margin: 0;  
+  padding: 0; 
+  display: flex;  
+  align-items: center;  
+}
+
+ 
+nav ul li {
+  position: relative;  
+}
+
+ 
+nav a {
+  text-decoration: none;  
+  color: white;  
+  padding: 10px;  
+  transition: background 0.3s ease;  
+}
+
+ 
+nav a:hover {
+  background-color: #6E3A10;  
+}
+
+ 
+nav ul li ul {
+  display: none;  
+  position: absolute;  
+  top: 100%; 
+  left: 0;  
+  background-color: #8B4513; 
+  padding: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+ 
+nav ul li:hover ul {
+  display: block;  
+}
+
+ 
+nav ul li ul li a {
+  padding: 10px;  
+  white-space: nowrap;  
+}
+.back:hover{
+    color:red;
+}
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background-color: #000000;">
+<body style="background-color: #000000;"></body>
+<nav  >
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>  
+  
+      
+      <li>
+        <a href="#">Babies</a>
+        <ul>  
+          <li><a href="{% url 'baby_list' %}">Registration</a></li>
+          <br>
+          <li><a href="{% url 'arrival_list' %}">Arrivals</a></li>
+          <br>
+          <li><a href="{% url 'departure_list' %}">Departure</a></li>
+        </ul>
+      </li>
+  
+
+      <li>
+        <a href="#">Sitters</a>
+        <ul>
+          <li><a href="{% url 'record_list'  %}">Registration</a></li>
+          <br>
+          <li><a href="{% url 'duty_list' %}">On Duty</a></li>
+          <br>
+          <li><a href="{% url 'assign_list' %}">Assignments</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Payments</a>
+        <ul>
+          <li><a href=" {% url 'daily_list' %}"> Daily</a></li>
+          <br>
+          <li><a href="{% url 'monthly_list' %}">Monthly</a></li>
+          <br>
+          <li><a href="#">Link 9</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
     <a class="back" href="{% url 'index' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
     <br><br>
 <center>
     <div class="app-icon"><img src="{% static 'images/looggoo.png'  %}" > </div>
 </center>
-    <div style="margin-top: 50px;" class="container">
+    <div   class="container">
 
-        <div class="row justify-content-center mt-5">
+        <div style="margin-bottom: 30px;" class="row justify-content-center mt-5">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center">
@@ -63,13 +195,11 @@
             </div>
         </div>
     </div>
-<br>
-<center>
-    <footer style="color:white">
-        &copy; 2024 DayStar Daycare. All rights reserved.
-    </footer>
-</center>
 
-<br>
+ 
+<footer>
+    <p>&copy; 2024 Daystar Daycare Management System. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>

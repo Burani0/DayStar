@@ -63,7 +63,7 @@ class AddBabyForm(forms.ModelForm):
     )
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
-    gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}))
+    gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}), label="")
     age = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Age", "class":"form-control"}), label="")
     location = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Location", "class":"form-control"}), label="")
     mother_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Mother's Name", "class":"form-control"}), label="")
