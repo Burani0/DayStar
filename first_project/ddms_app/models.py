@@ -67,6 +67,11 @@ class Arrival(models.Model):
         ('Fullday', 'Fullday'),
         
     )
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Cleared', 'Cleared'),
+        ('Partial', 'Partial'),
+    )
  
     first_name = models.CharField(max_length=50, blank=True,null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
@@ -75,7 +80,7 @@ class Arrival(models.Model):
     time_in = models.DateTimeField(auto_now_add = True, blank=True, null=True)
     period_of_stay = models.CharField(max_length=20, blank=True, null=True, choices=PERIOD)
  
-    payment_status = models.CharField(max_length=20, blank=True, null=True, )
+    payment_status = models.CharField(max_length=20, blank=True, null=True, choices=STATUS )
      
     
 

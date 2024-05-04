@@ -85,7 +85,12 @@ class ArrivalForm(forms.ModelForm):
         ('Halfday', 'Halfday'),
         ('Fullday', 'Fullday'),
         
-    )   
+    ) 
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Cleared', 'Cleared'),
+        ('Partial', 'Partial'),
+    )  
 
 
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
@@ -95,8 +100,9 @@ class ArrivalForm(forms.ModelForm):
     time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
  
     period_of_stay = forms.ChoiceField(choices=PERIOD, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Period of Stay"}), label="")
+    payment_status = forms.ChoiceField(choices=STATUS, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Payment Status"}), label="")
 
-    payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
+    # payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
     
     class Meta:
         model = Arrival
