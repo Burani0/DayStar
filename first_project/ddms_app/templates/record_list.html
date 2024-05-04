@@ -1,13 +1,14 @@
 {% extends  'base.html' %}
 
 {% block content%}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Hey {{ user }}!</strong> You're welcome.
+  
+</div>
     <h1>Sitters' Information</h1>
     
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Hey {{ user }}!</strong> You're welcome.
-     
-     
-    </div>
+
     <div class="mt-4 p-5 bg-secondary text-white rounded"> <table class="table table-striped table-bordered">
         <div class="mb-3">
             <button><a href="{% url 'add_record' %}" class="btn btn-success">

@@ -20,7 +20,7 @@ class Record(models.Model):
     location = models.CharField(max_length=30)
     next_of_kin = models.CharField(max_length=50)
     next_of_kin_phone = models.CharField(max_length=15)
-    NIN_number = models.IntegerField(default=0)
+    NIN_number = models.CharField(max_length=30)
     recommenders_name = models.CharField(max_length=50)
     recommenders_phone = models.CharField(max_length=15)
     religion = models.CharField(max_length=20)
@@ -90,13 +90,24 @@ class Arrival(models.Model):
 
 
 class Departure(models.Model):
+    PERIOD = (
+        ('Halfday', 'Halfday'),
+        ('Fullday', 'Fullday'),
+        
+    )
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Cleared', 'Cleared'),
+        ('Partial', 'Partial'),
+    )
+
     first_name = models.CharField(max_length=50, blank=True,null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
     name_person = models.CharField(max_length=50, blank=True, null=True)
     person_contact = models.CharField(max_length=50, blank=True, null=True)
     time_out = models.DateTimeField(auto_now_add = True, blank=True, null=True)
-    period_stayed = models.CharField(max_length=20, blank=True, null=True)
-    payment_status = models.CharField(max_length=20, blank=True, null=True)
+    period_stayed = models.CharField(max_length=20, blank=True, null=True, choices=PERIOD)
+    payment_status = models.CharField(max_length=20, blank=True, null=True, choices=STATUS)
 
 
     def __str__(self):

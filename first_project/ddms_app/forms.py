@@ -37,11 +37,11 @@ class AddRecordForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     date_of_birth = forms.DateField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Date Of Birth", "class":"form-control"}), label="")
-    gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}))
+    gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}),label="")
     location = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Location", "class":"form-control"}), label="")
     next_of_kin = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Next Of Kin", "class":"form-control"}), label="")
     next_of_kin_phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Next Of Kin Contact", "class":"form-control"}), label="")
-    NIN_number = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"NIN number", "class":"form-control"}), label="")
+    NIN_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"NIN number", "class":"form-control"}), label="")
     recommenders_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Name", "class":"form-control"}), label="")
     recommenders_phone =  forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Contact", "class":"form-control"}), label="")
     religion = forms.CharField( required=False, widget=forms.widgets.TextInput(attrs={"placeholder":" Religion", "class":"form-control"}), label="")
@@ -110,13 +110,25 @@ class ArrivalForm(forms.ModelForm):
 
 
 class DepartureForm(forms.ModelForm):
+    PERIOD = (
+        ('Halfday', 'Halfday'),
+        ('Fullday', 'Fullday'),
+        
+    )
+    STATUS = (
+        ('Pending', 'Pending'),
+        ('Cleared', 'Cleared'),
+        ('Partial', 'Partial'),
+    )
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Person", "class":"form-control"}), label="")
     person_contact = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Contact Number", "class":"form-control"}), label="")
     time_out = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time out','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
-    period_stayed = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Period Stayed', 'class': 'form-control'}), label="")
-    payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
+    # period_stayed = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Period Stayed', 'class': 'form-control'}), label="")
+    # payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
+    period_stayed = forms.ChoiceField(choices=PERIOD, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Period of Stay"}), label="")
+    payment_status = forms.ChoiceField(choices=STATUS, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Payment Status"}), label="")
 
 
     class Meta:
