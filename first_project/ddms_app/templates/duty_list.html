@@ -40,7 +40,7 @@
                 
                 <td>
                     <button type="submit"><a href="{% url 'edit_duty' duty.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button> 
-                            <form  style="background-color: white; box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_duty' duty.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');">
+                            <form  style="  box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_duty' duty.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');">
                                 {% csrf_token %}
                             
                                 <button   class="btn btn-danger"><i class="fas fa-trash"></i></button>

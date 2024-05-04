@@ -4,7 +4,7 @@
 <a class="back" href="{% url 'record_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
     <h1>Registering Sitters</h1>
-    <form method="post">
+    <form class="register" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>

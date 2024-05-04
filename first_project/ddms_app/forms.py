@@ -81,13 +81,21 @@ class AddBabyForm(forms.ModelForm):
 
     
 class ArrivalForm(forms.ModelForm):
+    PERIOD = (
+        ('Halfday', 'Halfday'),
+        ('Fullday', 'Fullday'),
+        
+    )   
+
 
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Person", "class":"form-control"}), label="")
     person_contact = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Contact Number", "class":"form-control"}), label="")
     time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
-    period_of_stay = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Period of Stay ',"class":"form-check-input"}), label="")
+ 
+    period_of_stay = forms.ChoiceField(choices=PERIOD, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Period of Stay"}), label="")
+
     payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
     
     class Meta:

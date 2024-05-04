@@ -5,7 +5,7 @@
 
 
     <h1>Assigning</h1>
-    <form method="post">
+    <form class="register" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>

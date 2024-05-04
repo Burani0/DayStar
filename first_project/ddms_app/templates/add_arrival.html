@@ -6,7 +6,7 @@
 
     <h1>Registering Babies On Arrival</h1>
     <br/>
-    <form action = "{%url 'add_arrival'%}" method="POST">
+    <form class="register" action = "{%url 'add_arrival'%}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
 

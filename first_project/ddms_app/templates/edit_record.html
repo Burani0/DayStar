@@ -2,7 +2,7 @@
 
 {% block content%}
     <h1>Updating Information</h1>
-    <form action="" method="post">
+    <form class="register" action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Update</button>

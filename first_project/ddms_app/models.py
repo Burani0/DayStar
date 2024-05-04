@@ -62,14 +62,18 @@ class Baby(models.Model):
 
 
 class Arrival(models.Model):
+    PERIOD = (
+        ('Halfday', 'Halfday'),
+        ('Fullday', 'Fullday'),
+        
+    )
  
     first_name = models.CharField(max_length=50, blank=True,null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
     name_person = models.CharField(max_length=50, blank=True, null=True)
     person_contact = models.CharField(max_length=50, blank=True, null=True)
     time_in = models.DateTimeField(auto_now_add = True, blank=True, null=True)
-    period_of_stay = models.CharField(max_length=20, blank=True, null=True)
-
+    period_of_stay = models.CharField(max_length=20, blank=True, null=True, choices=PERIOD)
  
     payment_status = models.CharField(max_length=20, blank=True, null=True, )
      
