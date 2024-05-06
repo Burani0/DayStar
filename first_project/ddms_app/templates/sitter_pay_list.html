@@ -24,8 +24,8 @@
  
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Lastname</th>
+                        <th>Sitter Name</th>
+                        
                         <th>Number of Babies</th>
                         <th>Amount per Baby</th>
                         <th>Total</th>
@@ -35,8 +35,8 @@
                 <tbody>
                     {% for sitter_pay in records %}
                     <tr>
-                        <td>{{ sitter_pay.first_name }}</td>
-                        <td>{{ sitter_pay.last_name }}</td>
+                        <td>{{ sitter_pay.sitter_on_duty }}</td>
+                         
                         <td>{{ sitter_pay.number_of_babies_attended_to }}</td>
                         <td>{{ sitter_pay.amount_per_baby }}</td>
                         <td>{{ sitter_pay.total }}</td>
@@ -44,7 +44,7 @@
                             <button><a href="{% url 'edit_sitterpay' sitter_pay.id %}" class="btn btn-danger" >
                                 <i class="fas fa-edit"></i>
                             </a></button>
-                            <form style="background-color: white; box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_sitterpay' sitter_pay.id %}" method="post"
+                            <form style="  box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_sitterpay' sitter_pay.id %}" method="post"
                              onsubmit="return confirm('Are you sure you want to delete this record?');">
                                 {% csrf_token %}
                                 <button class="btn btn-danger">

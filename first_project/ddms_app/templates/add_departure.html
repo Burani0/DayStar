@@ -4,7 +4,7 @@
 
 <a class="back" href="{% url 'departure_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
-    <h1>Registering Babies on Departure</h1>
+    <h1> Departure Form</h1>
     <form class="register" method="post">
         {% csrf_token %}
         {{ form.as_p }}

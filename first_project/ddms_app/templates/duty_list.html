@@ -1,11 +1,12 @@
 {% extends  'base.html' %}
 
 {% block content%}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Hey {{ user }}!</strong> You're welcome.
+  
+</div>
     <h1> Sitters' On Duty List</h1>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Hey {{ user }}!</strong> You're welcome.
-      
-    </div>
+  
     <div class="mt-4 p-5 bg-secondary text-white rounded">
         <table class="table table-striped table-bordered">
             <div class="mb-3">
@@ -22,8 +23,8 @@
         
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
+                    <th>Sitter Name</th>
+                   
                     <th>Sitter number</th>
                     <th>Action</th>
 
@@ -33,8 +34,8 @@
             <tbody>
                 {% for duty in records %}
                 <tr>
-                    <td>{{ duty.first_name }}</td>
-                    <td>{{ duty.last_name }}</td>
+                    <td>{{ duty.record }}</td>
+                     
                     <td>{{ duty.sitter_number }}</td>
  
                 

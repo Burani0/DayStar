@@ -1,11 +1,12 @@
 {% extends  'base.html' %}
 
 {% block content%}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Hey {{ user }}!</strong> You're welcome.
+  
+</div>
     <h1>Daily Payments</h1>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Hey {{ user }}!</strong> You're welcome.
-      
-    </div>
+
     
     <div class="mt-4 p-5 bg-secondary text-white rounded">
         <table class="table table-striped table-bordered">
@@ -23,10 +24,10 @@
          
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Shift attended</th>
-                    <th>Payment Status</th>
+                    <th>Baby Name / Shift Attended</th>
+                     
+                     
+                    
                     <th>Amount Paid</th>
                     <th>Balance</th>
                     <th>Action</th>
@@ -37,10 +38,10 @@
             <tbody>
                 {% for dailypay in records %}
                 <tr>
-                    <td>{{ dailypay.first_name }}</td>
-                    <td>{{ dailypay.last_name }}</td>
-                    <td>{{ dailypay.shift_attended }}</td>
-                    <td>{{ dailypay.payment_status }}</td>
+                    <td>{{ dailypay.departure }}</td>
+                    
+                    
+                    
                     <td>{{ dailypay.amount_paid }}</td>
                     <td>{{ dailypay.balance }}</td>
                     

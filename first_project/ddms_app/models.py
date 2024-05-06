@@ -6,16 +6,16 @@ from django.utils.timezone import datetime
 # Create your models here.
 
 
+
 class Record(models.Model):
     GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
-        
     )
-    created_at =models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    date_of_birth = models.DateField( )
+    date_of_birth = models.DateField()
     gender = models.CharField(max_length=10, choices=GENDER)
     location = models.CharField(max_length=30)
     next_of_kin = models.CharField(max_length=50)
@@ -24,12 +24,58 @@ class Record(models.Model):
     recommenders_name = models.CharField(max_length=50)
     recommenders_phone = models.CharField(max_length=15)
     religion = models.CharField(max_length=20)
-    level_of_education = models.CharField(max_length=20 )
+    level_of_education = models.CharField(max_length=20)
     sitter_number = models.IntegerField(default=0)
     phone_number = models.CharField(max_length=20)
-    
+
     def __str__(self):
-        return (f"{self.first_name} {self.last_name}")
+        return f"{self.first_name} {self.last_name}"
+
+# Define the Sitter_on_duty model with a ForeignKey to Record
+class Sitter_on_duty(models.Model):
+    # Reference to a Record
+    record = models.ForeignKey(
+        Record,
+        on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
+        related_name='sitters',    # Allows reverse lookup
+        null=True,                 # Sitter_on_duty may not always have a Record
+        blank=True                 # Allows for flexibility
+    )
+
+    
+    sitter_number = models.CharField(max_length=4 ,blank=True, null=True)
+
+    def __str__(self):
+        if self.record:
+            # Separating the fields but through the ForeignKey
+            return f' {self.record.first_name} {self.record.last_name} '
+        return f'Sitter-on_duty'
+
+
+# class Record(models.Model):
+#     GENDER = (
+#         ('Male', 'Male'),
+#         ('Female', 'Female'),
+        
+#     )
+#     created_at =models.DateTimeField(auto_now_add=True)
+#     first_name = models.CharField(max_length=50)
+#     last_name = models.CharField(max_length=50)
+#     date_of_birth = models.DateField( )
+#     gender = models.CharField(max_length=10, choices=GENDER)
+#     location = models.CharField(max_length=30)
+#     next_of_kin = models.CharField(max_length=50)
+#     next_of_kin_phone = models.CharField(max_length=15)
+#     NIN_number = models.CharField(max_length=30)
+#     recommenders_name = models.CharField(max_length=50)
+#     recommenders_phone = models.CharField(max_length=15)
+#     religion = models.CharField(max_length=20)
+#     level_of_education = models.CharField(max_length=20 )
+#     sitter_number = models.IntegerField(default=0)
+#     phone_number = models.CharField(max_length=20)
+    
+#     def __str__(self):
+#         return (f"{self.first_name} {self.last_name}")
 
 
 
@@ -100,9 +146,16 @@ class Departure(models.Model):
         ('Cleared', 'Cleared'),
         ('Partial', 'Partial'),
     )
+    arrival = models.ForeignKey(
+        Arrival,
+        on_delete=models.CASCADE,
+        related_name='departures',
+        null=True,
+        blank=True
+    )
 
-    first_name = models.CharField(max_length=50, blank=True,null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
+    
+ 
     name_person = models.CharField(max_length=50, blank=True, null=True)
     person_contact = models.CharField(max_length=50, blank=True, null=True)
     time_out = models.DateTimeField(auto_now_add = True, blank=True, null=True)
@@ -111,7 +164,20 @@ class Departure(models.Model):
 
 
     def __str__(self):
-        return (f'Departure:{self.first_name}')
+        if self.arrival:
+            return (
+                f'{self.arrival.first_name} '
+                f'{self.arrival.last_name}' 
+                f'{self.period_stayed}'
+            )
+        return (
+            f'Departure {self.name_person} '
+            f'{self.person_contact}'
+            f'{self.time_out}'
+            f'{self.period_stayed}'
+            f'{self.payment_status}'
+            
+        )
 
 
 class TodoItem(models.Model):
@@ -124,13 +190,13 @@ class TodoItem(models.Model):
 
 
 
-class Sitter_on_duty(models.Model):
-    first_name = models.CharField(max_length=50, blank=True,null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    sitter_number = models.IntegerField(blank=True, null=True)
+# class Sitter_on_duty(models.Model):
+#     first_name = models.CharField(max_length=50, blank=True,null=True)
+#     last_name = models.CharField(max_length=50, blank=True, null=True)
+#     sitter_number = models.IntegerField(blank=True, null=True)
     
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+#     def __str__(self):
+#         return f'{self.first_name} {self.last_name}'
 
 
 class Assign(models.Model):
@@ -159,46 +225,77 @@ class Assign(models.Model):
 
 
 class Monthlypay(models.Model):
-    first_name = models.CharField(max_length=50, blank=True,null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    payment_status = models.CharField(max_length=50, blank=True, null=True)
+    departure = models.ForeignKey(
+        Departure,
+        on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
+        related_name='mpays',    # Allows reverse lookup
+        null=True,                 # Sitter_on_duty may not always have a Record
+        blank=True                 # Allows for flexibility
+    )
+     
+     
     amount_paid = models.CharField(max_length=50, blank=True, null=True)
     balance = models.IntegerField(null=True, blank=True)
-    
+
 
     def __str__(self):
-        return (f'Monthlypay:{self.first_name}')
-
+        if self.departure:
+            # Separating the fields but through the ForeignKey
+            return f' {self.departure.first_name} {self.departure.last_name} '
+        return f'Monthlypay'
 
 class Dailypay(models.Model):
-    first_name = models.CharField(max_length=50, blank=True,null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    shift_attended = models.CharField(max_length=50, blank=True, null=True)
-    payment_status = models.CharField(max_length=50, blank=True, null=True)
+    departure = models.ForeignKey(
+        Departure,
+        on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
+        related_name='sitters',    # Allows reverse lookup
+        null=True,                 # Sitter_on_duty may not always have a Record
+        blank=True                 # Allows for flexibility
+    )
+     
+     
     amount_paid = models.CharField(max_length=50, blank=True, null=True)
     balance = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
-        return (f'Dailypay:{self.first_name}')
+        if self.departure:
+            # Separating the fields but through the ForeignKey
+            return f' {self.departure.first_name} {self.departure.last_name} '
+        return f'Dailypay'
+
 
 
 
 class Sitter_payment(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    sitter_on_duty = models.ForeignKey(
+        Sitter_on_duty,
+        on_delete=models.CASCADE,
+        related_name='sitters',
+        null=True,
+        blank=True
+    )
+
     number_of_babies_attended_to = models.IntegerField()
     amount_per_baby = models.DecimalField(default=3000, max_digits=10, decimal_places=2)
 
+    @property
     def total(self):
         return self.number_of_babies_attended_to * self.amount_per_baby
 
     def __str__(self):
-        return f"{self.first_name} {self.surname}"
-
-
-
-
+        if self.sitter_on_duty:
+            return (
+                f'Sitter_payment: {self.sitter_on_duty.first_name} '
+                f'{self.sitter_on_duty.last_name} - Number of Babies: '
+                f'{self.number_of_babies_attended_to} - Amount per Baby: {self.amount_per_baby} - Total Amount: {self.total}'
+            )
+        return (
+            f'Sitter_payment - Number of Babies: {self.number_of_babies_attended_to} '
+            f'- Amount per Baby: {self.amount_per_baby}'
+            f'- Total Amount: {self.total}'
+            
+        )
 
 
 

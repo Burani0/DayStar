@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<a class="back" href="{% url 'sitter_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
+<a class="back" href="{% url 'sitter_pay_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
-<h1> Sitters' Payment List</h1>
+<h1> Sitters' Payment Form</h1>
     <form class="register" method="post">
         {% csrf_token %}
         {{ form.as_p }}

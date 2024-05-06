@@ -4,8 +4,8 @@
 
 <a class="back" href="{% url 'arrival_list' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
-    <h1>Registering Babies On Arrival</h1>
-    <br/>
+    <h1>Baby Arrival Form</h1>
+    
     <form class="register" action = "{%url 'add_arrival'%}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}

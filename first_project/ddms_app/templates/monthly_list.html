@@ -22,9 +22,8 @@
          
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th>Surname</th>
-                    <th>Payment Status</th>
+                    <th>Baby Name / Shift Attended</th>
+                  
                     <th>Amount Paid</th>
                     <th>Balance</th>
                     <th>Action</th>
@@ -35,9 +34,8 @@
             <tbody>
                 {% for monthlypay in records %}
                 <tr>
-                    <td>{{ monthlypay.first_name }}</td>
-                    <td>{{ monthlypay.last_name }}</td>
-                    <td>{{ monthlypay.payment_status }}</td>
+
+                    <td>{{ monthlypay.departure }}</td>
                     <td>{{ monthlypay.amount_paid }}</td>
                     <td>{{ monthlypay.balance }}</td>
                      

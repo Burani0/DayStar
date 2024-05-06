@@ -120,8 +120,7 @@ class DepartureForm(forms.ModelForm):
         ('Cleared', 'Cleared'),
         ('Partial', 'Partial'),
     )
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
+     
     name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Person", "class":"form-control"}), label="")
     person_contact = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Contact Number", "class":"form-control"}), label="")
     time_out = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time out','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
@@ -143,13 +142,13 @@ class TodoForm(forms.ModelForm):
 
 
 class Sitter_on_dutyForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
+    # first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
+    # last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
 
     class Meta:
         model = Sitter_on_duty
-        fields = "__all__"
+        fields = ['record' , 'sitter_number' ]
 
 
 # class AssignForm(forms.ModelForm):
@@ -169,9 +168,7 @@ class AssignForm(forms.ModelForm):
 
 
 class MonthlypayForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
-    payment_status = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Status", "class":"form-control"}), label="")
+    
     amount_paid = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Paid", "class":"form-control"}), label="")
     balance = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Balance", "class":"form-control"}), label="")
      
@@ -181,11 +178,7 @@ class MonthlypayForm(forms.ModelForm):
 
 
 class DailypayForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
-    shift_attended = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Shift Attended", "class":"form-control"}), label="")
-
-    payment_status = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Payment Status", "class":"form-control"}), label="")
+     
     amount_paid = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Paid", "class":"form-control"}), label="")
     balance = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Balance", "class":"form-control"}), label="")
 
@@ -194,10 +187,9 @@ class DailypayForm(forms.ModelForm):
         fields = "__all__"
 
 
-
 class Sitter_paymentForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
-    last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
+#     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
+#     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     number_of_babies_attended_to = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Number of Babies Attended To", "class":"form-control"}), label="")
     # amount_per_baby = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Amount Per Baby", "class":"form-control"}), label="")
 
