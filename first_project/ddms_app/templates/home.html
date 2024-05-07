@@ -25,6 +25,7 @@
 body {
   margin: 0;  
   padding: 0;
+  background-color: rgb(188, 186, 186);
   
  
         
@@ -104,18 +105,35 @@ nav ul li ul li a {
 .back:hover{
     color:red;
 }
+.alert {
+        margin-bottom: 20px;
+        color: #000000;
+        background:none;
+        border: none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .back{
+    color:#8B4513;
+     
+}
+.back:hover{
+    color: #000000;
+}
+
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="background-color: #000000;"></body>
+<body></body>
 <nav  >
     <ul>
-      <li><a href="{% url 'home' %}">Home</a></li>  
+      <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>  
   
       
       <li>
-        <a href="#">Babies</a>
+        <a href="#"><i class="fas fa-baby"></i>Babies</a>
         <ul>  
           <li><a href="{% url 'baby_list' %}">Registration</a></li>
           <br>
@@ -127,7 +145,7 @@ nav ul li ul li a {
   
 
       <li>
-        <a href="#">Sitters</a>
+        <a href="#"><i class="fas fa-user-tie" ></i>Sitters</a>
         <ul>
           <li><a href="{% url 'record_list'  %}">Registration</a></li>
           <br>
@@ -138,7 +156,7 @@ nav ul li ul li a {
       </li>
 
       <li>
-        <a href="#">Payments</a>
+        <a href="#"><i class="fas fa-credit-card"></i>Payments</a>
         <ul>
           <li><a href=" {% url 'daily_list' %}"> Daily</a></li>
           <br>
@@ -154,10 +172,13 @@ nav ul li ul li a {
 
     <a class="back" href="{% url 'index' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
-    <br><br>
+    
 <center>
     <div class="app-icon"><img src="{% static 'images/looggoo.png'  %}" > </div>
 </center>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Hey {{ user }}!</strong> You're welcome.
+</div>
     <div   class="container">
 
         <div style="margin-bottom: 30px;" class="row justify-content-center mt-5">

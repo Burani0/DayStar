@@ -18,7 +18,7 @@
 
     h1 {
         text-align: center;
-        margin-top: 0px;
+        margin-top: 30px;
         color:#000000;
     }
 
@@ -368,11 +368,11 @@ label {
     <div class="main" >
     <nav  >
         <ul>
-          <li><a href="{% url 'home' %}">Home</a></li> <!-- Main nav item -->
+          <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li> <!-- Main nav item -->
       
           <!-- First Dropdown -->
           <li>
-            <a href="#">Babies</a>
+            <a href="#"><i class="fas fa-baby"></i>Babies</a>
             <ul> <!-- Dropdown menu -->
               <li><a href= "{% url 'arrival_list' %}">Arrivals</a></li>
               <br>
@@ -384,7 +384,7 @@ label {
       
  
           <li>
-            <a href="#">Sitters</a>
+            <a href="#"><i class="fas fa-user-tie" ></i>Sitters</a>
             <ul>
               <li><a href="{% url 'record_list'  %}">Registration</a></li>
               <br>
@@ -395,7 +395,7 @@ label {
           </li>
  
           <li>
-            <a href="#">Payments</a>
+            <a href="#"><i class="fas fa-credit-card"></i>Payments</a>
             <ul>
               <li><a href=" {% url 'daily_list' %}"> Daily</a></li>
               <br>
@@ -407,7 +407,7 @@ label {
         </ul>
       </nav>
     
-<div class="app-icon"><img src="{% static 'images/Logogram.mp4 '  %}" > </div>
+ 
 
  
     <div>
