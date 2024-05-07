@@ -33,7 +33,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='index.html'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(template_name = 'assets/index.html'), name= 'logout'),
     path('forgot-password/', forgot, name='forgot'),
     path('admin/', admin.site.urls),
     path('reset-password/', views.reset_password, name='reset_password'),

@@ -1,109 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Custom Navbar with Dropdowns</title>
-    <style>
-        /* Base Navbar Styles */
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 1em;
-        }
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        /* Navbar Layout */
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: space-between; /* Space out menu items */
-        }
+  <!-- Basic CSS for navigation -->
+  <style>
+    /* Basic reset to avoid default styling issues */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        nav li {
-            position: relative; /* Required for absolute positioning of dropdown */
-        }
+    /* Navigation bar styling */
+    nav {
+      display: flex;
+      justify-content: space-between; /* Distribute space between items */
+      align-items: center; /* Align vertically centered */
+      padding: 10px;
+      background-color: #333;
+    }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            transition: color 0.3s;
-        }
+    /* Styling for the image on the left */
+    nav img {
+      height: 60px;
+      border-radius: 35px; /* Adjust as needed */
+    }
 
-        nav a:hover {
-            color: #ccc; /* Change color on hover */
-        }
+    /* Styling for the unordered list on the right */
+    nav ul {
+      display: flex; /* Flex layout for inline items */
+      list-style: none; /* Remove default list styling */
+    }
 
-        /* Dropdown Base Styles */
-        nav ul ul {
-            display: none; /* Hidden by default */
-            position: absolute;
-            top: 100%; /* Position below the main item */
-            left: 0;
-            background-color: #333;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 100; /* Ensure dropdowns are on top */
-        }
+    /* Style individual list items */
+    nav ul li {
+      margin: 0 15px; /* Spacing between items */
+    }
 
-        /* Show the Dropdown on Hover */
-        nav li:hover ul {
-            display: block; /* Display the dropdown when hovering */
-        }
+    /* Style the anchor tags */
+    nav ul li a {
+      text-decoration: none; /* Remove underline */
+      color: white; /* Font color */
+      font-size: 16px; /* Adjust as needed */
+    }
 
-        /* Dropdown Link Styles */
-        nav ul ul li {
-            width: 150px; /* Width of the dropdown menu */
-        }
+    /* Dropdown styling */
+    nav ul li ul {
+      display: none; /* Initially hide dropdown */
+      position: absolute; /* Absolute positioning for dropdown */
+      background-color: #444; /* Dropdown background color */
+      padding: 10px; /* Padding within the dropdown */
+    }
 
-        nav ul ul li a {
-            display: block; /* Make dropdown links full-width */
-            padding: 10px;
-            transition: background-color 0.3s;
-        }
-
-        nav ul ul li a:hover {
-            background-color: #444; /* Change background color on hover */
-        }
-
-    </style>
+    /* Show dropdown on hover */
+    nav ul li:hover ul {
+      display: block; /* Show the dropdown on hover */
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <ul>
-    <li><a href="#">Home</a></li> <!-- Main nav item -->
+  <nav>
+    <!-- Add an image to the left side of the navigation bar -->
+    <img src="/first_project/ddms_app/static/images/Logo.png" alt="Site Logo" /> 
 
-    <!-- First Dropdown -->
-    <li>
-      <a href="#">Dropdown 1</a>
-      <ul> <!-- Dropdown menu -->
-        <li><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-      </ul>
-    </li>
+    <!-- Unordered list aligned to the right -->
+    <ul>
+      <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
 
-    <!-- Second Dropdown -->
-    <li>
-      <a href="#">Dropdown 2</a>
-      <ul>
-        <li><a href="#">Link 4</a></li>
-        <li><a href="#">Link 5</a></li>
-        <li><a href="#">Link 6</a></li>
-      </ul>
-    </li>
+      <!-- First Dropdown -->
+      <li>
+        <a href="#"><i class="fas fa-baby"></i> Babies</a>
+        <ul>
+          <li><a href="{% url 'arrival_list' %}">Arrivals</a></li>
+          <li><a href="{% url 'departure_list' %}">Departure</a></li>
+          <li><a href="{% url 'assign_list' %}">Assignments</a></li>
+        </ul>
+      </li>
 
-    <!-- Third Dropdown -->
-    <li>
-      <a href="#">Dropdown 3</a>
-      <ul>
-        <li><a href="/first_project/ddms_app/templates/baby_list.html">Link 7</a></li>
-        <li><a href="#">Link 8</a></li>
-        <li><a href="#">Link 9</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+      <!-- Sitters Dropdown -->
+      <li>
+        <a href="#"><i class="fas fa-user-tie"></i> Sitters</a>
+        <ul>
+          <li><a href="{% url 'record_list'  %}">Registration</a></li>
+          <li><a href="{% url 'duty_list' %}">On Duty</a></li>
+          <li><a href="{% url 'sitter_pay_list'%}">Payment</a></li>
+        </ul>
+      </li>
+
+      <!-- Payments Dropdown -->
+      <li>
+        <a href="#"><i class="fas fa-credit-card"></i> Payments</a>
+        <ul>
+          <li><a href="{% url 'daily_list' %}"> Daily</a></li>
+          <li><a href="{% url 'monthly_list' %}"> Monthly</a></li>
+          <li><a href="#">Link 9</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 </body>
 </html>

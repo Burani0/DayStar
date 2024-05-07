@@ -258,9 +258,13 @@ form.register button:hover {
 
         nav {
   background-color: #8B4513;  
-  padding: 20px;  
+  padding: 5px;  
   display: flex;  
-  justify-content: space-between; 
+  justify-content: space-between;
+  display: flex;
+    /* Distribute space between items */
+  align-items: center; /* Align vertically centered */
+        
    
 }
 
@@ -270,7 +274,8 @@ nav ul {
   margin: 0;  
   padding: 0; 
   display: flex;  
-  align-items: center;  
+  align-items: center; 
+   
 }
 
  
@@ -347,6 +352,15 @@ nav ul li ul li a {
             background-color: #ff8c00;
             
         }
+
+.messages{
+    color:#000000
+}
+nav img {
+      height: 60px;
+      border-radius: 35px; /* Adjust as needed */
+    }
+
         /* h2 {
     text-align: center;
 } */
@@ -367,6 +381,7 @@ label {
 <body>
     <div class="main" >
     <nav  >
+        <img src="{% static 'images/Logo.png' %}" alt="Site Logo" /> 
         <ul>
           <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li> <!-- Main nav item -->
       
@@ -404,6 +419,12 @@ label {
               <li><a href="#">Link 9</a></li>
             </ul>
           </li>
+          <li>
+            <form id="logout-form" action="{% url 'logout' %}" method="post">
+                <a href="#" onclick="document.getElementById('logout-form').submit(); return false;">Logout out</a>
+                {% csrf_token %}
+            </form>
+        </li>
         </ul>
       </nav>
     

@@ -26,7 +26,6 @@ from .forms import *
 def index(request):
     return render(request, 'index.html')
 
- 
 
 
 @login_required(login_url='/login/')
@@ -74,7 +73,7 @@ def add_record(request):
         form = AddRecordForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('record_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_record')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form = AddRecordForm()
     return render(request, 'add_record.html', {'form': form})
@@ -118,7 +117,7 @@ def add_baby(request):
         form = AddBabyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('baby_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_baby')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form = AddBabyForm()
     return render(request, 'add_baby.html', {'form': form})
@@ -162,7 +161,7 @@ def add_arrival(request):
         form = ArrivalForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('arrival_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_arrival')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form = ArrivalForm()
     return render(request, 'add_arrival.html', {'form': form})
@@ -205,7 +204,7 @@ def add_departure(request):
         form = DepartureForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('departure_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_departure')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form = DepartureForm()
     return render(request, 'add_departure.html', {'form': form})
@@ -276,7 +275,7 @@ def sitter_on_duty(request):
         form = Sitter_on_dutyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('duty_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('sitter_on_duty')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form = Sitter_on_dutyForm()
     return render(request, 'sitter_on_duty.html', {'form': form})
@@ -317,7 +316,7 @@ def add_assign(request):
         form = AssignForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('assign_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_assign')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form =  AssignForm()
     return render(request, 'add_assign.html', {'form': form})
@@ -363,7 +362,7 @@ def add_monthly(request):
         form = MonthlypayForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('monthly_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_monthly')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form =  MonthlypayForm()
     return render(request, 'add_monthly.html', {'form': form})
@@ -403,7 +402,7 @@ def add_daily(request):
         form = DailypayForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('daily_list')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_daily')  # Assuming you have a URL named 'record_list' for listing records
     else:
         form =  DailypayForm()
     return render(request, 'add_daily.html', {'form': form})
@@ -587,7 +586,7 @@ def add_sitter_pay(request):
         form = Sitter_paymentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('sitter_pay_list')
+            return redirect('add_sitter_pay')
     else:
         form =  Sitter_paymentForm()
 
