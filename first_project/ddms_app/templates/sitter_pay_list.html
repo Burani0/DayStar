@@ -34,7 +34,7 @@
                 <tbody>
                     {% for sitter_pay in records %}
                     <tr>
-                        <td>{{ sitter_pay.sitter_on_duty }}</td>
+                        <td>{{ sitter_pay.sitter_on_duty.record.first_name }} {{ sitter_pay.sitter_on_duty.record.last_name }}</td>
                          
                         <td>{{ sitter_pay.number_of_babies_attended_to }}</td>
                         <td>{{ sitter_pay.amount_per_baby }}</td>

@@ -145,10 +145,11 @@ class Sitter_on_dutyForm(forms.ModelForm):
     # first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     # last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
     sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
+    time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
 
     class Meta:
         model = Sitter_on_duty
-        fields = ['record' , 'sitter_number' ]
+        fields = '__all__'
 
 
 # class AssignForm(forms.ModelForm):

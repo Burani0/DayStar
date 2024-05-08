@@ -36,7 +36,8 @@
             <tbody>
                 {% for departure in records %}
                 <tr>
-                    <td>{{ departure.arrival }}</td>
+                    <td>{{ departure.arrival.first_name }} {{ departure.arrival.last_name }}</td>
+
                      <td>{{ departure.name_person }}</td>
                     <td>{{ departure.person_contact }}</td>
                     <td>{{ departure.time_out }}</td>

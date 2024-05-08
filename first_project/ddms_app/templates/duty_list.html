@@ -23,6 +23,7 @@
                     <th>Sitter Name</th>
                    
                     <th>Sitter number</th>
+                    <th>Time in</th>
                     <th>Action</th>
 
 
@@ -31,9 +32,10 @@
             <tbody>
                 {% for duty in records %}
                 <tr>
-                    <td>{{ duty.record }}</td>
+                    <td>{{ duty.record.first_name }} {{ duty.record.last_name }}</td>
                      
                     <td>{{ duty.sitter_number }}</td>
+                    <td>{{  duty.time_in }}</td>
  
                 
                 <td>

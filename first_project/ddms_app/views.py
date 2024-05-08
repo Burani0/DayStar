@@ -464,11 +464,15 @@ def monthlys_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
         records = Monthlypay.objects.filter(
-            first_name__icontains=search_query
+            departure__arrival__first_name__icontains=search_query
+        ) | Monthlypay.objects.filter( 
+            departure__arrival__last_name__icontains=search_query
         ) | Monthlypay.objects.filter(
-            last_name__icontains=search_query
+            departure__period_stayed__icontains=search_query
         ) | Monthlypay.objects.filter(
-            payment_status__icontains=search_query
+            amount_paid__icontains=search_query
+        ) | Monthlypay.objects.filter(
+            balance__icontains=search_query
         )
     else:
         records = Monthlypay.objects.all()
@@ -477,18 +481,25 @@ def monthlys_list(request):
 
 
 def dailys_list(request):
+    # Get the search query from the GET request
     search_query = request.GET.get('search', '')
+
+    # If there's a search query, apply filters
     if search_query:
+        # Ensure the fields referenced in the filter exist
         records = Dailypay.objects.filter(
-            first_name__icontains=search_query
+            departure__arrival__first_name__icontains=search_query
         ) | Dailypay.objects.filter(
-            last_name__icontains=search_query
+            departure__arrival__last_name__icontains=search_query
         ) | Dailypay.objects.filter(
-            shift_attended__icontains=search_query
+            departure__period_stayed__icontains=search_query
         ) | Dailypay.objects.filter(
-            payment_status__icontains=search_query
+            amount_paid__icontains=search_query
+        ) | Dailypay.objects.filter(
+            balance__icontains=search_query
         )
     else:
+        # If no search query, return all records
         records = Dailypay.objects.all()
 
     return render(request, 'daily_list.html', {'records': records, 'user': request.user})
@@ -497,15 +508,15 @@ def dailys_list(request):
 def dutys_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
-        records = Duty.objects.filter(
-            first_name__icontains=search_query
-        ) | Duty.objects.filter(
-            last_name__icontains=search_query
-        ) | Duty.objects.filter(
+        records = Sitter_on_duty.objects.filter(
+            record__first_name__icontains=search_query
+        ) | Sitter_on_duty.objects.filter( 
+            record__last_name__icontains=search_query
+        ) | Sitter_on_duty.objects.filter(
             sitter_number__icontains=search_query
-        )
+        )  
     else:
-        records =  Duty.objects.all()
+        records =  Sitter_on_duty.objects.all()
 
     return render(request, 'duty_list.html', {'records': records, 'user': request.user})
 
@@ -532,9 +543,11 @@ def departures_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
         records = Departure.objects.filter(
-            first_name__icontains=search_query
+            arrival__first_name__icontains=search_query
         ) | Departure.objects.filter(
-            last_name__icontains=search_query
+            arrival__last_name__icontains=search_query
+        ) | Departure.objects.filter(
+            time_out__icontains=search_query
         ) | Departure.objects.filter(
             period_stayed__icontains=search_query
         ) | Departure.objects.filter(
@@ -569,11 +582,13 @@ def give_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
         records = Assign.objects.filter(
-            first_name__icontains=search_query
+            sitter_on_duty__record__first_name__icontains=search_query
         ) | Assign.objects.filter(
-            last_name__icontains=search_query
+            sitter_on_duty__record__last_name__icontains=search_query
         ) | Assign.objects.filter(
-            baby_assigned__icontains=search_query
+            baby_assigned__first_name__icontains=search_query
+        ) | Assign.objects.filter(
+            baby_assigned__last_name__icontains=search_query
         )
     else:
         records =  Assign.objects.all()
@@ -625,12 +640,12 @@ def search_pay_sitter(request):
     search_query = request.GET.get('search', '')
     if search_query:
         records = Sitter_payment.objects.filter(
-            first_name__icontains=search_query
+            sitter_on_duty__record__first_name__icontains=search_query
         ) | Sitter_payment.objects.filter(
-            last_name__icontains=search_query
+            sitter_on_duty__record__last_name__icontains=search_query
         ) | Sitter_payment.objects.filter(
-            amount_per_baby__icontains=search_query
-        )
+            number_of_babies_attended_to__icontains=search_query
+        ) 
     else:
         records =  Sitter_payment.objects.all()
 

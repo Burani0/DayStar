@@ -31,7 +31,7 @@
             <tbody>
                 {% for assign in records %}
                 <tr>
-                    <td>{{ assign.sitter_on_duty }}</td>
+                    <td>{{ assign.sitter_on_duty.record.first_name }} {{ assign.sitter_on_duty.record.last_name }}</td>
                     <td>{{  assign.baby_assigned   }}</td>
  
                 

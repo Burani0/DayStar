@@ -32,7 +32,8 @@
                 {% for monthlypay in records %}
                 <tr>
 
-                    <td>{{ monthlypay.departure }}</td>
+                    <td>{{ monthlypay.departure.arrival.first_name }} {{ monthlypay.departure.arrival.last_name }} 
+                        {{ monthlypay.departure.period_stayed }}</td>
                     <td>{{ monthlypay.amount_paid }}</td>
                     <td>{{ monthlypay.balance }}</td>
                      

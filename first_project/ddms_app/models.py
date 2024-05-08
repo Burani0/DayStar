@@ -44,6 +44,7 @@ class Sitter_on_duty(models.Model):
 
     
     sitter_number = models.CharField(max_length=4 ,blank=True, null=True)
+    time_in = models.DateTimeField(auto_now_add=True , blank=True, null=True)
 
     def __str__(self):
         if self.record:
@@ -52,30 +53,6 @@ class Sitter_on_duty(models.Model):
         return f'Sitter-on_duty'
 
 
-# class Record(models.Model):
-#     GENDER = (
-#         ('Male', 'Male'),
-#         ('Female', 'Female'),
-        
-#     )
-#     created_at =models.DateTimeField(auto_now_add=True)
-#     first_name = models.CharField(max_length=50)
-#     last_name = models.CharField(max_length=50)
-#     date_of_birth = models.DateField( )
-#     gender = models.CharField(max_length=10, choices=GENDER)
-#     location = models.CharField(max_length=30)
-#     next_of_kin = models.CharField(max_length=50)
-#     next_of_kin_phone = models.CharField(max_length=15)
-#     NIN_number = models.CharField(max_length=30)
-#     recommenders_name = models.CharField(max_length=50)
-#     recommenders_phone = models.CharField(max_length=15)
-#     religion = models.CharField(max_length=20)
-#     level_of_education = models.CharField(max_length=20 )
-#     sitter_number = models.IntegerField(default=0)
-#     phone_number = models.CharField(max_length=20)
-    
-#     def __str__(self):
-#         return (f"{self.first_name} {self.last_name}")
 
 
 
@@ -266,7 +243,6 @@ class Dailypay(models.Model):
 
 
 
-
 class Sitter_payment(models.Model):
     sitter_on_duty = models.ForeignKey(
         Sitter_on_duty,
@@ -299,6 +275,35 @@ class Sitter_payment(models.Model):
 
 
 
+class Dollstal(models.Model):
+    name = models.CharField(max_length=50, blank=True,null=True)
+    price = models.IntegerField(blank=True, null=True)
+
+
+    def __str__(self):
+        return f'{self.name} {self.price}'
+
+
+class Dollpay(models.Model):
+    dollstal = models.ForeignKey(
+        Dollstal,
+        on_delete=models.CASCADE,
+        related_name='dollpays',
+        null=True,
+        blank=True
+    )
+    baby_name = models.ForeignKey(
+        Arrival,
+        on_delete=models.SET_NULL,  # If the Arrival record is deleted, set to null
+        related_name='pricedoll',  # Allows reverse lookup
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        # Custom string representation
+        if self.baby_name:
+            return f'Dollpay for {self.baby_name}'
+        return f'Dollpay'
     
 
 

@@ -35,8 +35,11 @@
             <tbody>
                 {% for dailypay in records %}
                 <tr>
-                    <td>{{ dailypay.departure }}</td>
-                    
+                    <td>
+                        {{ dailypay.departure.arrival.first_name }} 
+                        {{ dailypay.departure.arrival.last_name }} 
+                        {{ dailypay.departure.period_stayed }}
+                    </td>
                     
                     
                     <td>{{ dailypay.amount_paid }}</td>

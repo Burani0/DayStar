@@ -181,20 +181,20 @@ h1 {
 </head>
 <body> 
 
-<nav>
-  <img src="{% static 'images/Logo.png' %}" alt="Site Logo" /> 
+  <nav  >
+    <img src="{% static 'images/Logo.png' %}" alt="Site Logo" /> 
     <ul>
-      <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>  
+      <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li> <!-- Main nav item -->
   
-      
+      <!-- First Dropdown -->
       <li>
         <a href="#"><i class="fas fa-baby"></i>Babies</a>
-        <ul>  
-          <li><a href="{% url 'baby_list' %}">Registration</a></li>
-          <br>
-          <li><a href="{% url 'arrival_list' %}">Arrivals</a></li>
+        <ul> <!-- Dropdown menu -->
+          <li><a href= "{% url 'arrival_list' %}">Arrivals</a></li>
           <br>
           <li><a href="{% url 'departure_list' %}">Departure</a></li>
+          <br>
+          <li><a href="{% url 'assign_list' %}">Assignments</a></li>
         </ul>
       </li>
   
@@ -206,7 +206,7 @@ h1 {
           <br>
           <li><a href="{% url 'duty_list' %}">On Duty</a></li>
           <br>
-          <li><a href="{% url 'assign_list' %}">Assignments</a></li>
+          <li><a href="{% url 'sitter_pay_list'%}">Payment</a></li>
         </ul>
       </li>
 
@@ -216,13 +216,18 @@ h1 {
           <li><a href=" {% url 'daily_list' %}"> Daily</a></li>
           <br>
           <li><a href="{% url 'monthly_list' %}">Monthly</a></li>
-          <br>
-          <li><a href="#">Link 9</a></li>
+           <br>
+          <li><a href="{% url 'sitter_pay_list'  %}">Sitters</a></li>
         </ul>
       </li>
+      <li>
+        <form id="logout-form" action="{% url 'logout' %}" method="post">
+            <a href="#" onclick="document.getElementById('logout-form').submit(); return false;"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            {% csrf_token %}
+        </form>
+    </li>
     </ul>
   </nav>
-
 
 
     <a class="back" href="{% url 'index' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
