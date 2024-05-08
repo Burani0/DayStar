@@ -292,7 +292,7 @@ class Dollpay(models.Model):
         null=True,
         blank=True
     )
-    baby_name = models.ForeignKey(
+    arrival = models.ForeignKey(
         Arrival,
         on_delete=models.SET_NULL,  # If the Arrival record is deleted, set to null
         related_name='pricedoll',  # Allows reverse lookup
@@ -300,9 +300,8 @@ class Dollpay(models.Model):
         blank=True
     )
     def __str__(self):
-        # Custom string representation
-        if self.baby_name:
-            return f'Dollpay for {self.baby_name}'
+        dollname = f'{self.dollstal.name} {self.dollstal.price}'
+        baby_name = f'{self.arrival.first_name} {self.arrival.last_name}'
         return f'Dollpay'
     
 

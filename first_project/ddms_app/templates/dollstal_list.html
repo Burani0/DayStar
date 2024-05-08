@@ -1,0 +1,64 @@
+{% extends  'base.html' %}
+
+{% block content%}
+ 
+    <h1>Dollstal</h1>
+
+    
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table class="table table-striped table-bordered">
+            <div class="mb-3">
+                <button><a href="{% url 'add_dollstal' %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add
+                </a></button>
+            
+                <form class="button" style="  box-shadow: 0px; padding: 0px; border-radius: 0px; margin: 0px; max-width: 200px;" method="GET" action="{% url 'dollstal_search' %}">
+                    <input type="text" name="search" class="form-control" placeholder="Search ...">
+                   
+             
+                </form>
+            </div>
+         
+            <thead>
+                <tr>
+ 
+                    
+                    <th>Doll Brand</th>
+                    <th>Price</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for dolls in records %}
+                <tr>
+                   
+                    
+                    
+                    <td>{{ dolls.name }}</td>
+                    <td>{{ dolls.price }}</td>
+                    
+                
+                <td>
+                    <button type="submit"><a href="{% url 'edit_dollstal' dolls.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button>
+                            
+                            <form  style="  box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_dollstal' dolls.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                {% csrf_token %}
+                            
+                                <button    ><i class="fas fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+    {% endblock %}

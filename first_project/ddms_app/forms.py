@@ -198,9 +198,13 @@ class Sitter_paymentForm(forms.ModelForm):
         model =  Sitter_payment
         fields = "__all__"
      
-        # model = BabyAttendance
-        # fields = ['first_name', 'surname', 'number_of_babies_attended_to', 'amount_per_baby']
+class DollstalForm(forms.ModelForm):
+    name = forms.CharField(required=True , widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Doll Brand"}), label="")
+    price = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Price"}), label="")
 
+    class Meta:
+        model = Dollstal
+        fields = "__all__"
 
 
  

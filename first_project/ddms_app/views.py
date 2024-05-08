@@ -652,5 +652,59 @@ def search_pay_sitter(request):
     return render(request, 'sitter_pay_list.html', {'records': records, 'user': request.user})
 
 
+def add_dollstal(request):
+    if request.method == 'POST':
+        form = DollstalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_dollstal')
+    else:
+        form =  DollstalForm()
+
+    return render(request, 'add_dollstal.html', {'form': form})
+
+# View to list all BabyAttendance objects
+def dollstal_list(request):
+    records = Dollstal.objects.all()
+    return render(request, 'dollstal_list.html', {'records': records})
+
+
+def delete_dollstal(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Dollstal.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('dollstal_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('dollstal_list')
+
+
+
+def edit_dollstal(request, pk):
+    dolls = get_object_or_404(Dollstal, id=pk)
+    if request.method == 'POST':
+        form = DollstalForm(request.POST, instance=dolls)
+        if form.is_valid():
+            form.save()
+            return redirect('dollstal_list')  # Redirect to the record list page after editing
+    else:
+        form =  DollstalForm(instance=dolls)
+    return render(request, 'edit_dollstal.html', {'form': form})
+
+def dollstal_search(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Dollstal.objects.filter(
+            name__icontains=search_query
+        ) | Dollstal.objects.filter(
+            price__icontains=search_query
+        )  
+    else:
+        records =  Dollstal.objects.all()
+
+    return render(request, 'dollstal_list.html', {'records': records, 'user': request.user})
+
+
 
 
