@@ -207,6 +207,15 @@ class DollstalForm(forms.ModelForm):
         fields = "__all__"
 
 
+class PaydollForm(forms.ModelForm):
+    class Meta:
+        model = Dollpay
+        fields = '__all__'
+
+
+
+
+
  
 
 

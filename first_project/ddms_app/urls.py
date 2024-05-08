@@ -98,6 +98,13 @@ urlpatterns = [
     path('dollstal_search/', views.dollstal_search, name='dollstal_search'),
 
 
+    path('add_paydoll/', views.add_paydoll, name='add_paydoll'),  # URL for adding a Dollpay
+    path('list_dollpay/', views.paydoll_list, name='paydoll_list'),  # URL for listing all Dollpay records
+    path('delete_paydoll/<int:pk>/', views.delete_paydoll, name='delete_paydoll'),  # URL for deleting a Dollpay
+    path('edit_paydoll/<int:pk>/', views.edit_paydoll, name='edit_paydoll'),  # URL for editing a Dollpay
+    path('paydoll_search/', views.paydoll_search, name='paydoll_search'),
+
+
 
     
  

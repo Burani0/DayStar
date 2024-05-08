@@ -706,5 +706,61 @@ def dollstal_search(request):
     return render(request, 'dollstal_list.html', {'records': records, 'user': request.user})
 
 
+def add_paydoll(request):
+    if request.method == 'POST':
+        form = PaydollForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_paydoll')
+    else:
+        form =  PaydollForm()
+
+    return render(request, 'add_paydoll.html', {'form': form})
+
+# View to list all BabyAttendance objects
+def paydoll_list(request):
+    records = Dollpay.objects.all()
+    return render(request, 'paydoll_list.html', {'records': records})
+
+
+def delete_paydoll(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Dollpay.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('paydoll_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('paydoll_list')
+
+
+
+def edit_paydoll(request, pk):
+    paydolls = get_object_or_404(Dollpay, id=pk)
+    if request.method == 'POST':
+        form = PaydollForm(request.POST, instance=paydolls)
+        if form.is_valid():
+            form.save()
+            return redirect('paydoll_list')  # Redirect to the record list page after editing
+    else:
+        form = PaydollForm(instance=paydolls)
+    return render(request, 'edit_paydoll.html', {'form': form})
+
+def paydoll_search(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        records = Dollpay.objects.filter(
+            dollstall__name__icontains=search_query
+        ) | Dollpay.objects.filter(
+            dollstall__price__icontains=search_query
+        ) | Dollpay.objects.filter(
+            arrival__first_name__icontains=search_query
+        ) | Dollpay.objects.filter(
+            arrival__last_name__icontains=search_query
+        )
+    else:
+        records =  Dollpay.objects.all()
+
+    return render(request, 'paydoll_list.html', {'records': records, 'user': request.user})
 
 
