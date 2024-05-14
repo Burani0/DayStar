@@ -27,7 +27,7 @@
                     <th>Time out</th>
                     <th>Period Stayed</th>
                     <th>Payment Status</th>
-                    
+                    <th>Comment</th>
                     <th>Action</th>
 
 
@@ -43,6 +43,7 @@
                     <td>{{ departure.time_out }}</td>
                     <td>{{ departure.period_stayed }}</td>
                     <td>{{ departure.payment_status }}</td>
+                    <td>{{ departure.comment}}</td>
                     
                     <td>
                         <button type="submit"><a href="{% url 'edit_departure' departure.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button>

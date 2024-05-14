@@ -43,7 +43,7 @@ class AddRecordForm(forms.ModelForm):
     next_of_kin_phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Next Of Kin Contact", "class":"form-control"}), label="")
     NIN_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"NIN number", "class":"form-control"}), label="")
     recommenders_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Name", "class":"form-control"}), label="")
-    recommenders_phone =  forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Contact", "class":"form-control"}), label="")
+    # recommenders_phone =  forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Recommender's Contact", "class":"form-control"}), label="")
     religion = forms.CharField( required=False, widget=forms.widgets.TextInput(attrs={"placeholder":" Religion", "class":"form-control"}), label="")
     level_of_education = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Education Background", "class":"form-control"}), label="")
     sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
@@ -128,6 +128,7 @@ class DepartureForm(forms.ModelForm):
     # payment_status=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Payment Status ',"class":"form-check-input"}), label="")
     period_stayed = forms.ChoiceField(choices=PERIOD, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Period of Stay"}), label="")
     payment_status = forms.ChoiceField(choices=STATUS, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Payment Status"}), label="")
+    comment = forms.CharField(required=False, widget=forms.widgets.TextInput(attrs={"class": "form-control", "placeholder":"comment"}), label="")
 
 
     class Meta:
@@ -136,9 +137,12 @@ class DepartureForm(forms.ModelForm):
 
 
 class TodoForm(forms.ModelForm):
+    task = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"class": "form-control", "placeholder":"Event"}),label="")
+
     class Meta:
         model = TodoItem
         fields = ["task", "is_completed"]
+        
 
 
 class Sitter_on_dutyForm(forms.ModelForm):
@@ -201,6 +205,7 @@ class Sitter_paymentForm(forms.ModelForm):
 class DollstalForm(forms.ModelForm):
     name = forms.CharField(required=True , widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Doll Brand"}), label="")
     price = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Price"}), label="")
+    amount_in_stock = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Amount in Stock"}),label="")
 
     class Meta:
         model = Dollstal
@@ -208,9 +213,10 @@ class DollstalForm(forms.ModelForm):
 
 
 class PaydollForm(forms.ModelForm):
+    amount_bought = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Amount Bought"}),label="")
     class Meta:
         model = Dollpay
-        fields = '__all__'
+        fields = ['dollstal', 'arrival', 'amount_bought' ,  ]
 
 
 

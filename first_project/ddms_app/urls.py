@@ -94,7 +94,7 @@ urlpatterns = [
     path('add_dollstal/', views.add_dollstal, name='add_dollstal'),
     path('dollstal/', views.dollstal_list, name='dollstal_list'),
     path('delete_dollstal/<int:pk>/', views.delete_dollstal, name='delete_dollstal'),
-    path('edit_dollstal/<int:id>/', views.edit_dollstal, name='edit_dollstal'),
+    path('edit_dollstal/<int:pk>/', views.edit_dollstal, name='edit_dollstal'),
     path('dollstal_search/', views.dollstal_search, name='dollstal_search'),
 
 

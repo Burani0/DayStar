@@ -247,13 +247,13 @@ def add_todo(request):
         form = TodoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("todo_list")
+            return redirect("add_todo_list")
     else:
         form = TodoForm()
     return render(request, "add_todo.html", {"form": form})
 
 def update_todo(request, pk):
-    item = get_object_or_404(TodoItem, pk=pk)
+    item = get_object_or_404(TodoItem, id=pk)
     if request.method == "POST":
         form = TodoForm(request.POST, instance=item)
         if form.is_valid():
@@ -263,10 +263,21 @@ def update_todo(request, pk):
         form = TodoForm(instance=item)
     return render(request, "update_todo.html", {"form": form})
 
+
+
+
+
 def delete_todo(request, pk):
-    item = get_object_or_404(TodoItem, pk=pk)
-    item.delete()
-    return redirect("todo_list")
+    if request.user.is_authenticated:
+        delete_it = TodoItem.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('todo_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('todo_list')
+
+   
 
 
 

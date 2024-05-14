@@ -6,7 +6,8 @@
     <h1>Sitters' Information</h1>
     
 
-    <div class="mt-4 p-5 bg-secondary text-white rounded"> <table class="table table-striped table-bordered">
+    <div   class="mt-4 p-5 bg-secondary text-white rounded">
+         <table  class="table table-striped table-bordered">
         <div class="mb-3">
             <button><a href="{% url 'add_record' %}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Add
@@ -31,7 +32,7 @@
                     <th>Next Of Kin Contact</th>
                     <th>NIN number</th>
                     <th>Recommender's Name</th>
-                    <th>Recommender's Contact</th>
+                    <!-- <th>Recommender's Contact</th> -->
                     <th>Religion</th>
                     <th>Education Background</th>
                     <th>Sitter Number</th>
@@ -52,7 +53,7 @@
                         <td>{{ record.next_of_kin_phone }}</td>
                         <td>{{ record.NIN_number }}</td>
                         <td>{{ record.recommenders_name }}</td>
-                        <td>{{ record.recommenders_phone }}</td>
+                        <!-- <td>{{ record.recommenders_phone }}</td> -->
                         <td>{{ record.religion }}</td>
                         <td>{{ record.level_of_education }}</td>
                         <td>{{ record.sitter_number }}</td>

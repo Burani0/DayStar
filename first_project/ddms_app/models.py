@@ -52,12 +52,7 @@ class Sitter_on_duty(models.Model):
             return f' {self.record.first_name} {self.record.last_name} '
         return f'Sitter-on_duty'
 
-
-
-
-
-        
-
+ 
 
 class Baby(models.Model):
     GENDER = (
@@ -138,6 +133,7 @@ class Departure(models.Model):
     time_out = models.DateTimeField(auto_now_add = True, blank=True, null=True)
     period_stayed = models.CharField(max_length=20, blank=True, null=True, choices=PERIOD)
     payment_status = models.CharField(max_length=20, blank=True, null=True, choices=STATUS)
+    comment = models.CharField(max_length=100, blank=True, null=True)
 
 
     def __str__(self):
@@ -276,13 +272,12 @@ class Sitter_payment(models.Model):
 
 
 class Dollstal(models.Model):
-    name = models.CharField(max_length=50, blank=True,null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
-
+    amount_in_stock = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.name} {self.price}'
-
 
 class Dollpay(models.Model):
     dollstal = models.ForeignKey(
@@ -294,17 +289,21 @@ class Dollpay(models.Model):
     )
     arrival = models.ForeignKey(
         Arrival,
-        on_delete=models.SET_NULL,  # If the Arrival record is deleted, set to null
-        related_name='pricedoll',  # Allows reverse lookup
+        on_delete=models.SET_NULL,
+        related_name='babydoll',
         null=True,
         blank=True
     )
+
+    amount_bought = models.IntegerField(null=True, blank=True)
+    total = models.IntegerField(null=True, blank=True)  # New field for total
+
     def __str__(self):
-        dollname = f'{self.dollstal.name} {self.dollstal.price}'
-        baby_name = f'{self.arrival.first_name} {self.arrival.last_name}'
-        return f'Dollpay'
-    
+        return f'{self.dollstal.name} {self.arrival.first_name} {self.arrival.last_name} {self.amount_bought}'
 
-
-
-    
+    def save(self, *args, **kwargs):
+        if self.dollstal and self.amount_bought:
+            self.total = self.dollstal.price * self.amount_bought  # Calculate total
+            self.dollstal.amount_in_stock -= self.amount_bought
+            self.dollstal.save()
+        super().save(*args, **kwargs)

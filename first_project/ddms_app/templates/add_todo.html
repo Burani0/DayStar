@@ -1,11 +1,12 @@
 {% extends  'base.html' %}
 
 {% block content%}
+ 
     <h1>Add To-Do</h1>
-    <form class="register" method="post">
+    <form class="event" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add</button>
+        <button type="submit">Update</button>
     </form>
     <a href="{% url 'todo_list' %}">Back to List</a>
     {% endblock %}
