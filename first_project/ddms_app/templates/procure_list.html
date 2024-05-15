@@ -1,0 +1,59 @@
+{% extends  'base.html' %}
+
+{% block content%}
+ 
+    <h1>Procurement List</h1>
+  
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table class="table table-striped table-bordered">
+            <div class="mb-3">
+                <button><a href="{% url 'add_procure' %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add
+                </a></button>
+            
+ 
+            </div>
+        
+            <thead>
+                <tr>
+                    <th>Item</th>
+                   
+                    <th>Quantity(packets/pieces/litres)</th>
+                   
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for procure in records %}
+                <tr>
+                    <td>{{ procure.name }} </td>
+                     
+                    <td>{{ procure.quantity }} </td>
+ 
+                     
+ 
+                
+                <td>
+                    <button type="submit"><a href="{% url 'edit_procure' procure.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button> 
+                            <form  style="  box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_procure' procure.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                {% csrf_token %}
+                            
+                                <button   class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+    {% endblock %}

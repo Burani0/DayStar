@@ -105,6 +105,16 @@ urlpatterns = [
     path('paydoll_search/', views.paydoll_search, name='paydoll_search'),
 
 
+     
+    path('products/', views.products, name='products'),
+
+
+    path('add_procure/', views.add_procure, name='add_procure'),
+    path('procure_list/', views.procure_list, name='procure_list'),
+    path('delete_procure/<int:pk>/', views.delete_procure, name='delete_procure'),
+    path('edit_procure/<int:pk>/', views.edit_procure, name='edit_procure'),
+ 
+
 
     
  

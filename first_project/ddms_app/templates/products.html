@@ -4,35 +4,26 @@
 <a class="back" href="{% url 'home' %}" ><i class="fas fa-chevron-left"><i class="fas fa-arrow-left"></i></i>Back </a> 
 
     <div class="card-container" id="first">
-        <h1>Payments Dashbord</h1>
+        <h1>Procurement Dashbord</h1>
 
         <div style="border-radius: 40px; background-color: #ff8c00; width: 400px;" class="card" id="second">
       
 
         <div class="card-container" id="first">
-            <a href="{% url 'monthly_list' %}">
+            <a href="{% url 'dollstal_list' %}">
             <div class="card" id="second">
-                <h2>Monthly Payment</h2>
+                <h2> Commodities</h2>
             </div>
 
         </a>
 
 
-            <a href="{% url 'daily_list' %}">
+            <a href="{% url 'procure_list' %}">
             <div class="card" id="second">
-                <h2>Daily Payment</h2>
+                <h2>Procurement</h2>
             </div>
             </a>
-            <a href="{% url 'sitter_pay_list' %}">
-                <div class="card" id="second">
-                    <h2>Sitter Payment</h2>
-                </div>
-                </a>
-                <a href="{% url 'paydoll_list' %}">
-                    <div class="card" id="second">
-                        <h2>Doll Payments</h2>
-                    </div>
-                    </a>
+           
  
             
         </div>

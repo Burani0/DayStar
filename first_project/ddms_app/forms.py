@@ -142,7 +142,7 @@ class TodoForm(forms.ModelForm):
     class Meta:
         model = TodoItem
         fields = ["task", "is_completed"]
-        
+
 
 
 class Sitter_on_dutyForm(forms.ModelForm):
@@ -217,6 +217,17 @@ class PaydollForm(forms.ModelForm):
     class Meta:
         model = Dollpay
         fields = ['dollstal', 'arrival', 'amount_bought' ,  ]
+
+
+class ProcurementForm(forms.ModelForm):
+    name = forms.CharField(required=True , widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Item"}), label="")
+    quantity = forms.IntegerField(required=True , widget=forms.widgets.TextInput(attrs={'class': 'form-control', "placeholder":"Quantity"}), label="")
+
+    class Meta:
+        model = Procurement
+        fields = "__all__"
+
+        
 
 
 

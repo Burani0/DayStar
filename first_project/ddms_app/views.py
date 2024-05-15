@@ -775,3 +775,47 @@ def paydoll_search(request):
     return render(request, 'paydoll_list.html', {'records': records, 'user': request.user})
 
 
+
+def products(request):
+    return render(request, 'products.html' )
+
+
+
+def add_procure(request):
+    if request.method == 'POST':
+        form = ProcurementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_procure')
+    else:
+        form =  ProcurementForm()
+
+    return render(request, 'add_procure.html', {'form': form})
+
+def procure_list(request):
+    records = Procurement.objects.all()
+    return render(request, 'procure_list.html', {'records': records})
+
+
+def delete_procure(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Procurement.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('procure_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('procure_list')
+
+
+
+def edit_procure(request, pk):
+    procure = get_object_or_404(Procurement, id=pk)
+    if request.method == 'POST':
+        form = ProcurementForm(request.POST, instance=procure)
+        if form.is_valid():
+            form.save()
+            return redirect('procure_list')  # Redirect to the record list page after editing
+    else:
+        form = ProcurementForm(instance=procure)
+    return render(request, 'edit_procure.html', {'form': form})

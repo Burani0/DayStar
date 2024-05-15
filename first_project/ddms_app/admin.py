@@ -22,3 +22,5 @@ admin.site.register(Dailypay)
 admin.site.register(Sitter_payment)
 admin.site.register(Dollstal)
 admin.site.register(Dollpay)
+admin.site.register(Procurement)
+

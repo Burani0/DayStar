@@ -307,3 +307,11 @@ class Dollpay(models.Model):
             self.dollstal.amount_in_stock -= self.amount_bought
             self.dollstal.save()
         super().save(*args, **kwargs)
+
+
+class Procurement(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+    quantity = models.IntegerField( blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.name} {self.quantity}'
