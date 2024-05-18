@@ -22,7 +22,6 @@ class Record(models.Model):
     next_of_kin_phone = models.CharField(max_length=15)
     NIN_number = models.CharField(max_length=30)
     recommenders_name = models.CharField(max_length=50)
-    recommenders_phone = models.CharField(max_length=15)
     religion = models.CharField(max_length=20)
     level_of_education = models.CharField(max_length=20)
     sitter_number = models.IntegerField(default=0)
@@ -33,22 +32,22 @@ class Record(models.Model):
 
 # Define the Sitter_on_duty model with a ForeignKey to Record
 class Sitter_on_duty(models.Model):
-    # Reference to a Record
+     
     record = models.ForeignKey(
         Record,
-        on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
-        related_name='sitters',    # Allows reverse lookup
-        null=True,                 # Sitter_on_duty may not always have a Record
-        blank=True                 # Allows for flexibility
+        on_delete=models.CASCADE,   
+        related_name='sitters',     
+        null=True,                  
+        blank=True                 
     )
 
     
-    sitter_number = models.CharField(max_length=4 ,blank=True, null=True)
+    sitter_number = models.CharField(max_length=4 ,blank=False, null=True)
     time_in = models.DateTimeField(auto_now_add=True , blank=True, null=True)
 
     def __str__(self):
         if self.record:
-            # Separating the fields but through the ForeignKey
+            
             return f' {self.record.first_name} {self.record.last_name} '
         return f'Sitter-on_duty'
 

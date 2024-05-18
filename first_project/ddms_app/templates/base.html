@@ -192,6 +192,16 @@ form.register button {
             
         }
 
+form.register input:valid {
+    border: 2px solid green;  
+}     
+form.register select:valid{
+    border: 2px solid green;
+}
+
+form.register input:focus{
+    border: 2px solid #ccc;
+}
         /* .button-submit:hover {
             background-color: #252727;
         } */
@@ -205,13 +215,14 @@ form.register button:hover {
 
     #second {
             width: 300px;
-            background-color: #fff;
+            background-color: #8B4513;
             border-radius: 40%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 10px;
             text-align: center;
             transition: transform 0.3s ease;
+            color: white;
         }
 
     #second:hover {
@@ -222,6 +233,7 @@ form.register button:hover {
         margin-top: 200px;
         background-color: #ff8c00;
     }
+    
     footer {
             background:#8B4513;
             color: #fff;
