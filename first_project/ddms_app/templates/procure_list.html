@@ -32,9 +32,10 @@
                     <td>{{ procure.name }} </td>
                      
                     <td>{{ procure.quantity }} </td>
- 
-                     <td><button class="btn btn-success">Issue</button></td>
-                     <td><button>Issued</button></td>
+                   <td>
+                    <button><a href="{% url 'add_issue' %}" class="btn btn-success"><i class="fa-solid fa-box"></i><i class="fa-solid fa-hand-holding"></i></a></button></td>
+                     <td><button><a class="btn btn-success" href="{% url 'issue_list' %}"> <i class="fa-solid fa-history"></i></a></button></td> 
+
  
                 
                 <td>

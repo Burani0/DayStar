@@ -42,7 +42,6 @@ class Sitter_on_duty(models.Model):
     )
 
     
-    sitter_number = models.CharField(max_length=4 ,blank=False, null=True)
     time_in = models.DateTimeField(auto_now_add=True , blank=True, null=True)
 
     def __str__(self):
@@ -79,6 +78,11 @@ class Baby(models.Model):
 
 
 class Arrival(models.Model):
+    GENDER = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        
+    )
     PERIOD = (
         ('Halfday', 'Halfday'),
         ('Fullday', 'Fullday'),
@@ -92,6 +96,9 @@ class Arrival(models.Model):
  
     first_name = models.CharField(max_length=50, blank=True,null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
+    gender = models.CharField(max_length=10, blank=True,null=True, choices=GENDER)
+    age = models.IntegerField(null=True, blank=True)
+    location = models.CharField(max_length=30, null=True, blank=True)
     name_person = models.CharField(max_length=50, blank=True, null=True)
     person_contact = models.CharField(max_length=50, blank=True, null=True)
     time_in = models.DateTimeField(auto_now_add = True, blank=True, null=True)
@@ -138,7 +145,7 @@ class Departure(models.Model):
     def __str__(self):
         if self.arrival:
             return (
-                f'{self.arrival.first_name} '
+                f'{self.arrival.first_name}'
                 f'{self.arrival.last_name}' 
                 f'{self.period_stayed}'
             )
@@ -313,4 +320,27 @@ class Procurement(models.Model):
     quantity = models.IntegerField( blank=True, null=True)
 
     def __str__(self):
-        return f'{self.name} {self.quantity}'
+        return f'{self.name}'
+
+
+class Issue(models.Model):
+
+    procurement = models.ForeignKey(
+        Procurement,
+        on_delete=models.CASCADE,
+        related_name='dollpays',
+        null=True,
+        blank=True
+    )
+    issue_person = models.CharField(max_length=50, blank=True, null=True)
+    qty_issue = models.IntegerField( blank=True, null=True)
+    time_in = models.DateTimeField(auto_now_add = True, blank=True, null=True)
+
+    def __str__(self):
+        return f' {self.procurement.name} {self.issue_person} {self.qty_issue} '
+
+    def save(self, *args, **kwargs):
+        if self.procurement and self.qty_issue:
+            self.procurement.quantity -= self.qty_issue
+            self.procurement.save()
+        super().save(*args, **kwargs)

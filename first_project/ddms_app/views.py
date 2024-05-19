@@ -20,12 +20,27 @@ from .models import Sitter_on_duty
 from .forms import Sitter_on_dutyForm
 from .models import *
 from .forms import *
-
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
 
+
+
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    form_class = AuthenticationForm
+    success_url = reverse_lazy('home')   
+
+    def form_invalid(self, form):
+         
+        form.add_error(None, "Username does not match password")
+        return super().form_invalid(form)
 
 
 @login_required(login_url='/login/')
@@ -40,8 +55,7 @@ def forgot(request):
         form = ForgotPasswordForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            # Here you would typically send an email with a reset link
-            # For simplicity, let's just display a success message
+ 
             messages.success(request, 'Instructions to reset your password have been sent to your email.')
             return redirect('reset_password')
     else:
@@ -55,10 +69,9 @@ def reset_password(request):
     if request.method == 'POST':
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
-            # Here you can write logic to validate the code, new password, and confirmation password
-            # and perform the password reset action if validation passes
+ 
             messages.success(request, 'Password reset successfully!')
-            return redirect('login')  # Redirect to the login password page after successful reset
+            return redirect('login')  
     else:
         form = ResetPasswordForm()
     return render(request, 'reset_password.html', {'form': form})
@@ -73,7 +86,7 @@ def add_record(request):
         form = AddRecordForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_record')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_record')   
     else:
         form = AddRecordForm()
     return render(request, 'add_record.html', {'form': form})
@@ -106,7 +119,7 @@ def edit_record(request, record_id):
         form = AddRecordForm(request.POST, instance=record)
         if form.is_valid():
             form.save()
-            return redirect('record_list')  # Redirect to the record list page after editing
+            return redirect('record_list')   
     else:
         form = AddRecordForm(instance=record)
     return render(request, 'edit_record.html', {'form': form})
@@ -117,7 +130,7 @@ def add_baby(request):
         form = AddBabyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_baby')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_baby')   
     else:
         form = AddBabyForm()
     return render(request, 'add_baby.html', {'form': form})
@@ -148,7 +161,7 @@ def edit_baby(request, baby_id):
         form = AddBabyForm(request.POST, instance=baby)
         if form.is_valid():
             form.save()
-            return redirect('baby_list')  # Redirect to the record list page after editing
+            return redirect('baby_list')   
     else:
         form = AddBabyForm(instance=baby)
     return render(request, 'edit_baby.html', {'form': form})
@@ -161,7 +174,7 @@ def add_arrival(request):
         form = ArrivalForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_arrival')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_arrival')  
     else:
         form = ArrivalForm()
     return render(request, 'add_arrival.html', {'form': form})
@@ -190,7 +203,7 @@ def edit_arrival(request, arrival_id):
         form = ArrivalForm(request.POST, instance=arrival)
         if form.is_valid():
             form.save()
-            return redirect('arrival_list')  # Redirect to the record list page after editing
+            return redirect('arrival_list')   
     else:
         form = ArrivalForm(instance=arrival)
     return render(request, 'edit_arrival.html', {'form': form})
@@ -204,7 +217,7 @@ def add_departure(request):
         form = DepartureForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_departure')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_departure')   
     else:
         form = DepartureForm()
     return render(request, 'add_departure.html', {'form': form})
@@ -233,7 +246,7 @@ def edit_departure(request, departure_id):
         form = DepartureForm(request.POST, instance=departure)
         if form.is_valid():
             form.save()
-            return redirect('departure_list')  # Redirect to the record list page after editing
+            return redirect('departure_list')  
     else:
         form = DepartureForm(instance=departure)
     return render(request, 'edit_departure.html', {'form': form})
@@ -247,7 +260,7 @@ def add_todo(request):
         form = TodoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("add_todo_list")
+            return redirect("add_todo")
     else:
         form = TodoForm()
     return render(request, "add_todo.html", {"form": form})
@@ -286,7 +299,7 @@ def sitter_on_duty(request):
         form = Sitter_on_dutyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('sitter_on_duty')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('sitter_on_duty')   
     else:
         form = Sitter_on_dutyForm()
     return render(request, 'sitter_on_duty.html', {'form': form})
@@ -315,7 +328,7 @@ def edit_duty(request, pk):
         form = Sitter_on_dutyForm(request.POST, instance=duty)
         if form.is_valid():
             form.save()
-            return redirect('duty_list')  # Redirect to the record list page after editing
+            return redirect('duty_list')   
     else:
         form =  Sitter_on_dutyForm(instance=duty)
     return render(request, 'edit_duty.html', {'form': form})
@@ -327,7 +340,7 @@ def add_assign(request):
         form = AssignForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_assign')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_assign')   
     else:
         form =  AssignForm()
     return render(request, 'add_assign.html', {'form': form})
@@ -356,7 +369,7 @@ def edit_assign(request, pk):
         form = AssignForm(request.POST, instance=assign)
         if form.is_valid():
             form.save()
-            return redirect('assign_list')  # Redirect to the record list page after editing
+            return redirect('assign_list')   
     else:
         form =  AssignForm(instance=assign)
     return render(request, 'edit_assign.html', {'form': form})
@@ -373,7 +386,7 @@ def add_monthly(request):
         form = MonthlypayForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_monthly')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_monthly')   
     else:
         form =  MonthlypayForm()
     return render(request, 'add_monthly.html', {'form': form})
@@ -402,7 +415,7 @@ def edit_monthly(request, pk):
         form = MonthlypayForm(request.POST, instance=monthlypay)
         if form.is_valid():
             form.save()
-            return redirect('monthly_list')  # Redirect to the record list page after editing
+            return redirect('monthly_list')   
     else:
         form =  MonthlypayForm(instance=monthlypay)
     return render(request, 'edit_monthly.html', {'form': form})
@@ -413,7 +426,7 @@ def add_daily(request):
         form = DailypayForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('add_daily')  # Assuming you have a URL named 'record_list' for listing records
+            return redirect('add_daily')   
     else:
         form =  DailypayForm()
     return render(request, 'add_daily.html', {'form': form})
@@ -442,7 +455,7 @@ def edit_daily(request, pk):
         form = DailypayForm(request.POST, instance=dailypay)
         if form.is_valid():
             form.save()
-            return redirect('daily_list')  # Redirect to the record list page after editing
+            return redirect('daily_list')   
     else:
         form =  DailypayForm(instance=dailypay)
     return render(request, 'edit_daily.html', {'form': form})
@@ -492,12 +505,11 @@ def monthlys_list(request):
 
 
 def dailys_list(request):
-    # Get the search query from the GET request
+ 
     search_query = request.GET.get('search', '')
-
-    # If there's a search query, apply filters
+ 
     if search_query:
-        # Ensure the fields referenced in the filter exist
+         
         records = Dailypay.objects.filter(
             departure__arrival__first_name__icontains=search_query
         ) | Dailypay.objects.filter(
@@ -510,7 +522,7 @@ def dailys_list(request):
             balance__icontains=search_query
         )
     else:
-        # If no search query, return all records
+ 
         records = Dailypay.objects.all()
 
     return render(request, 'daily_list.html', {'records': records, 'user': request.user})
@@ -618,7 +630,7 @@ def add_sitter_pay(request):
 
     return render(request, 'add_sitter_pay.html', {'form': form})
 
-# View to list all BabyAttendance objects
+ 
 def sitter_pay_list(request):
     records = Sitter_payment.objects.all()
     return render(request, 'sitter_pay_list.html', {'records': records})
@@ -642,7 +654,7 @@ def edit_sitterpay(request, pk):
         form = Sitter_paymentForm(request.POST, instance=sitter_pay)
         if form.is_valid():
             form.save()
-            return redirect('sitter_pay_list')  # Redirect to the record list page after editing
+            return redirect('sitter_pay_list') 
     else:
         form =  Sitter_paymentForm(instance=sitter_pay)
     return render(request, 'edit_sitter_pay.html', {'form': form})
@@ -673,8 +685,7 @@ def add_dollstal(request):
         form =  DollstalForm()
 
     return render(request, 'add_dollstal.html', {'form': form})
-
-# View to list all BabyAttendance objects
+ 
 def dollstal_list(request):
     records = Dollstal.objects.all()
     return render(request, 'dollstal_list.html', {'records': records})
@@ -698,7 +709,7 @@ def edit_dollstal(request, pk):
         form = DollstalForm(request.POST, instance=dolls)
         if form.is_valid():
             form.save()
-            return redirect('dollstal_list')  # Redirect to the record list page after editing
+            return redirect('dollstal_list')   
     else:
         form =  DollstalForm(instance=dolls)
     return render(request, 'edit_dollstal.html', {'form': form})
@@ -728,7 +739,7 @@ def add_paydoll(request):
 
     return render(request, 'add_paydoll.html', {'form': form})
 
-# View to list all BabyAttendance objects
+ 
 def paydoll_list(request):
     records = Dollpay.objects.all()
     return render(request, 'paydoll_list.html', {'records': records})
@@ -752,7 +763,7 @@ def edit_paydoll(request, pk):
         form = PaydollForm(request.POST, instance=paydolls)
         if form.is_valid():
             form.save()
-            return redirect('paydoll_list')  # Redirect to the record list page after editing
+            return redirect('paydoll_list')  
     else:
         form = PaydollForm(instance=paydolls)
     return render(request, 'edit_paydoll.html', {'form': form})
@@ -819,3 +830,43 @@ def edit_procure(request, pk):
     else:
         form = ProcurementForm(instance=procure)
     return render(request, 'edit_procure.html', {'form': form})
+
+
+def add_issue(request):
+    if request.method == 'POST':
+        form = IssueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_issue')
+    else:
+        form =  IssueForm()
+
+    return render(request, 'add_issue.html', {'form': form})
+
+def issue_list(request):
+    records = Issue.objects.all()
+    return render(request, 'issue_list.html', {'records': records})
+
+
+def delete_issue(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Issue.objects.get(id = pk)
+        delete_it.delete()
+        messages.success(request, 'Record deleted successfuly')
+        return redirect('issue_list')
+    else:
+        messages.success(request, "You must be logged in to delete!")
+        return redirect('issue_list')
+
+
+
+def edit_issue(request, pk):
+    issue = get_object_or_404(Issue, id=pk)
+    if request.method == 'POST':
+        form = IssueForm(request.POST, instance=issue)
+        if form.is_valid():
+            form.save()
+            return redirect('issue_list')   
+    else:
+        form = IssueForm(instance=issue)
+    return render(request, 'edit_issue.html', {'form': form})

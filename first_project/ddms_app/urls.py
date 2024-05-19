@@ -23,6 +23,7 @@ from .views import departure_list
 from .views import delete_departure
 from .views import edit_departure
 from . views import *
+from .views import CustomLoginView
 
 
 
@@ -32,7 +33,8 @@ aap_name="ddms_app"
 urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    # path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'assets/index.html'), name= 'logout'),
     path('forgot-password/', forgot, name='forgot'),
     path('admin/', admin.site.urls),
@@ -114,9 +116,10 @@ urlpatterns = [
     path('delete_procure/<int:pk>/', views.delete_procure, name='delete_procure'),
     path('edit_procure/<int:pk>/', views.edit_procure, name='edit_procure'),
  
-
-
-    
+    path('add_issue/', views.add_issue, name='add_issue'),  # Ensure this line is present
+    path('issue_list/', views.issue_list, name='issue_list'),
+    path('edit_issue/<int:id>/', views.edit_procure, name='edit_issue'),
+    path('delete_issue/<int:id>/', views.delete_procure, name='delete_issue'),
  
     
 

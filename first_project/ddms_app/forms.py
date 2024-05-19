@@ -30,6 +30,7 @@ class ResetPasswordForm(forms.Form):
 # Create Add Record Form
 class AddRecordForm(forms.ModelForm):
     GENDER = (
+        ('', '--Select Gender--'),
         ('Male', 'Male'),
         ('Female', 'Female'),
         
@@ -81,12 +82,20 @@ class AddBabyForm(forms.ModelForm):
 
     
 class ArrivalForm(forms.ModelForm):
+    GENDER = (
+        ('', '--Select Gender--'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        
+    )
     PERIOD = (
+        ('', '--Select Period of Stay--'),
         ('Halfday', 'Halfday'),
         ('Fullday', 'Fullday'),
         
     ) 
     STATUS = (
+        ('', '--Select Payment Status--'),
         ('Pending', 'Pending'),
         ('Cleared', 'Cleared'),
         ('Partial', 'Partial'),
@@ -95,7 +104,11 @@ class ArrivalForm(forms.ModelForm):
 
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="" )
     last_name = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Surname", "class":"form-control"}), label="")
-    name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Person", "class":"form-control"}), label="")
+    gender = forms.ChoiceField(choices=GENDER, required=True, widget=forms.Select(attrs={"class": "form-control", "placeholder": "Gender"}), label="")
+    age = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Age", "class":"form-control"}), label="")
+    location = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Location", "class":"form-control"}), label="")
+ 
+    name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Parent/Guardian", "class":"form-control"}), label="")
     person_contact = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Contact Number", "class":"form-control"}), label="")
     time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
  
@@ -111,17 +124,19 @@ class ArrivalForm(forms.ModelForm):
 
 class DepartureForm(forms.ModelForm):
     PERIOD = (
+        ('', '--Select Period of Stay--'),
         ('Halfday', 'Halfday'),
         ('Fullday', 'Fullday'),
         
     )
     STATUS = (
+        ('', '--Select Payment Status--'), 
         ('Pending', 'Pending'),
         ('Cleared', 'Cleared'),
         ('Partial', 'Partial'),
     )
      
-    name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Person", "class":"form-control"}), label="")
+    name_person = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name of Parent/Guardian", "class":"form-control"}), label="")
     person_contact = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Contact Number", "class":"form-control"}), label="")
     time_out = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time out','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
      
@@ -155,12 +170,11 @@ class TodoForm(forms.ModelForm):
 
 
 class Sitter_on_dutyForm(forms.ModelForm):
-    sitter_number =forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Sitter Number", "class":"form-control"}), label="")
     time_in = forms.DateTimeField(label='', widget=forms.DateTimeInput(attrs={'placeholder':'Time in','class': 'form-control'}),required=True,input_formats=['%Y-%m-%d %H:%M:%S']),
 
     class Meta:
         model = Sitter_on_duty
-        fields = ['record', 'sitter_number']
+        fields = ['record',]
          
  
 
@@ -231,6 +245,7 @@ class DailypayForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DailypayForm, self).__init__(*args, **kwargs)
         self.fields['departure'].queryset = Departure.objects.all()
+        # .values_list('first_name', flat=True)
         self.fields['departure'].empty_label = "--select baby--"
         self.fields['departure'].widget.attrs.update({
             'class': 'form-control'
@@ -281,7 +296,7 @@ class PaydollForm(forms.ModelForm):
         self.fields['dollstal'].widget.attrs.update({
             'class': 'form-control'
         })
-        
+
         self.fields['arrival'].queryset = Arrival.objects.all()
         self.fields['arrival'].empty_label = "--select baby--"
         self.fields['arrival'].widget.attrs.update({
@@ -297,8 +312,23 @@ class ProcurementForm(forms.ModelForm):
         model = Procurement
         fields = "__all__"
 
-        
 
+class IssueForm(forms.ModelForm):
+    issue_person = forms.CharField(widget=forms.widgets.TextInput(attrs={'class':'form-control', "placeholder":"Name Of Person Issuing"}),label="",required=True)
+    qty_issue = forms.IntegerField(widget=forms.widgets.TextInput(attrs={'class':'form-control', "placeholder":"Issued Quantity"}), label="", required=True)
+
+    class Meta:
+        model = Issue
+        fields = [ 'procurement','issue_person', 'qty_issue']
+
+        
+    def __init__(self, *args, **kwargs):
+        super(IssueForm, self).__init__(*args, **kwargs)
+        self.fields['procurement'].queryset = Procurement.objects.all()
+        self.fields['procurement'].empty_label = "--select Item--"
+        self.fields['procurement'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
 
 

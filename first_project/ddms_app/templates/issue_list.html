@@ -1,0 +1,63 @@
+{% extends  'base.html' %}
+
+{% block content%}
+ 
+    <h1> Issue List</h1>
+  
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <table class="table table-striped table-bordered">
+            <div class="mb-3">
+                <button><a href="{% url 'add_issue' %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add
+                </a></button>
+            
+ 
+            </div>
+        
+            <thead>
+                <tr>
+                 
+                   
+                    <th>Item</th>
+                    <th>Name Of Issuer</th>
+                    <th>Quantity Issued </th>
+                     <th>Date Of Issue</th>
+                    <th>Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for issue in records %}
+                <tr>
+                  
+                     
+                    <td>{{ issue.procurement.name }} </td>
+                    <td>{{ issue.issue_person }} </td>
+                    <td>{{ issue.qty_issue }}</td>
+                    <td>{{ issue.time_in }}</td>
+                     
+ 
+                
+                <td>
+                    <button type="submit"><a href="{% url 'edit_issue' issue.id %}" class="btn btn-danger"><i class="fas fa-edit"></i></a></button> 
+                            <form  style="  box-shadow: 0px;padding: 0px; border-radius: 0px; margin: 0px;" action="{% url 'delete_issue' issue.id %}" method="post"  onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                {% csrf_token %}
+                            
+                                <button   class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+    {% endblock %}
