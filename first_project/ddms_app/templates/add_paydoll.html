@@ -6,6 +6,7 @@
     <h1>Doll Payment Form</h1>
     <form  class="register" method="post">
         {% csrf_token %}
+        {{ form.non_field_errors }}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>

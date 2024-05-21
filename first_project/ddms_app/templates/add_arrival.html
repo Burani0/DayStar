@@ -8,6 +8,7 @@
     
     <form class="register" action = "{%url 'add_arrival'%}" method="POST">
         {% csrf_token %}
+        {{ form.non_field_errors }}
         {{ form.as_p }}
 
         <br/>

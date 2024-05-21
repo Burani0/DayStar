@@ -24,7 +24,7 @@ class Record(models.Model):
     recommenders_name = models.CharField(max_length=50)
     religion = models.CharField(max_length=20)
     level_of_education = models.CharField(max_length=20)
-    sitter_number = models.IntegerField(default=0)
+    sitter_number = models.IntegerField(unique=True, default=0)
     phone_number = models.CharField(max_length=20)
 
     def __str__(self):

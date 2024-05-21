@@ -1,3 +1,4 @@
+{%  load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
         }
 
         
-        nav {
+        /* nav {
             background-color: #8B4513;  
             padding: 15px;
         }
@@ -30,9 +31,76 @@
             text-decoration: none;
             color: #F0F8FF;  
             font-weight: bold;
-        }
+        } */
 
-         
+        nav {
+  background-color: #8B4513;  
+  padding: 5px;  
+  display: flex;  
+  justify-content: space-between;
+  display: flex;
+    /* Distribute space between items */
+  align-items: center; /* Align vertically centered */
+
+        
+   
+}
+
+ 
+nav ul {
+  list-style-type: none; 
+  margin: 0;  
+  padding: 0; 
+  display: flex;  
+  align-items: center; 
+   
+}
+
+ 
+nav ul li {
+  position: relative;  
+}
+
+ 
+nav a {
+  text-decoration: none;  
+  color: white;  
+  padding: 10px;  
+  transition: background 0.3s ease;  
+}
+
+ 
+nav a:hover {
+  background-color: #6E3A10;  
+}
+
+ 
+nav ul li ul {
+  display: none;  
+  position: absolute;  
+  top: 100%; 
+  left: 0; 
+   
+  background-color: #8B4513; 
+  padding: 10px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+ 
+nav ul li:hover ul {
+  display: block;  
+}
+
+ 
+nav ul li ul li a {
+  padding: 10px;  
+  white-space: nowrap;  
+}
+    
+nav img {
+      height: 80px;
+      border-radius: 45px; /* Adjust as needed */
+    }  
         .hero {
             background-image: url('first_project/ddms_app/static/images');
             background-size: cover;
@@ -119,8 +187,10 @@ h2{
 <body>
      
     <nav>
+        <img src="{% static 'images/Logo.png' %}" alt="Site Logo" /> 
+
         <ul>
-            <li><a href="#">Daystar Daycare Management System</a></li>
+            <li style="font-size: 30px; font-weight: bold;"><a href="#">Daystar Daycare Management System</a></li>
             
         </ul>
     </nav>
