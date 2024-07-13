@@ -38,7 +38,7 @@ class Sitter_on_duty(models.Model):
         on_delete=models.CASCADE,   
         related_name='sitters',     
         null=True,                  
-        blank=True                 
+        blank=False,                 
     )
 
     
@@ -129,7 +129,7 @@ class Departure(models.Model):
         on_delete=models.CASCADE,
         related_name='departures',
         null=True,
-        blank=True
+        blank=False,
     )
 
     
@@ -185,7 +185,7 @@ class Assign(models.Model):
         on_delete=models.CASCADE,
         related_name='assignments',
         null=True,
-        blank=True
+        blank=False,
     )
 
     # Foreign key pointing to Arrival for baby_assigned
@@ -194,7 +194,7 @@ class Assign(models.Model):
         on_delete=models.SET_NULL,  # If the Arrival record is deleted, set to null
         related_name='assignments',  # Allows reverse lookup
         null=True,
-        blank=True
+        blank=False, 
     )
 
     def __str__(self):
@@ -209,7 +209,7 @@ class Monthlypay(models.Model):
         on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
         related_name='mpays',    # Allows reverse lookup
         null=True,                 # Sitter_on_duty may not always have a Record
-        blank=True                 # Allows for flexibility
+        blank=False,                 # Allows for flexibility
     )
      
      
@@ -229,7 +229,7 @@ class Dailypay(models.Model):
         on_delete=models.CASCADE,  # Deleting the Record deletes the Sitter_on_duty
         related_name='sitters',    # Allows reverse lookup
         null=True,                 # Sitter_on_duty may not always have a Record
-        blank=True                 # Allows for flexibility
+        blank=False,                 # Allows for flexibility
     )
      
      
@@ -251,7 +251,7 @@ class Sitter_payment(models.Model):
         on_delete=models.CASCADE,
         related_name='sitters',
         null=True,
-        blank=True
+        blank=False,
     )
 
     number_of_babies_attended_to = models.IntegerField()
@@ -291,14 +291,14 @@ class Dollpay(models.Model):
         on_delete=models.CASCADE,
         related_name='dollpays',
         null=True,
-        blank=True
+        blank=False,
     )
     arrival = models.ForeignKey(
         Arrival,
         on_delete=models.SET_NULL,
         related_name='babydoll',
         null=True,
-        blank=True
+        blank=False,
     )
 
     amount_bought = models.IntegerField(null=True, blank=True)
@@ -330,7 +330,7 @@ class Issue(models.Model):
         on_delete=models.CASCADE,
         related_name='dollpays',
         null=True,
-        blank=True
+        blank=False,
     )
     issue_person = models.CharField(max_length=50, blank=True, null=True)
     qty_issue = models.IntegerField( blank=True, null=True)
